@@ -18,13 +18,13 @@ export function WhyChoose() {
 
             <div className="relative aspect-video overflow-hidden">
 
-            <video
-  className="h-full w-full object-cover"
-  autoPlay
-  muted
-  loop
-  playsInline
->
+              <video
+                className="h-full w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+              >
                 <source
                   src="/videos/testimonio.mp4"
                   type="video/mp4"
@@ -97,64 +97,85 @@ export function WhyChoose() {
             <div className="mt-8 space-y-5">
 
               {[
-                "Escríbenos por WhatsApp",
-                "Cuéntanos qué sucede",
-                "Asignamos un médico",
-                "Llegamos a tu domicilio",
+                {
+                  text: "Escríbenos por WhatsApp",
+                  link: "https://wa.me/573105769818?text=Hola,%20quiero%20solicitar%20un%20médico%20a%20domicilio."
+                },
+                {
+                  text: "Cuéntanos qué sucede",
+                  link: "https://wa.me/573105769818?text=Hola,%20necesito%20orientación%20médica."
+                },
+                {
+                  text: "Asignamos un médico",
+                  link: "https://wa.me/573105769818?text=Hola,%20quiero%20solicitar%20la%20visita%20de%20un%20médico."
+                },
+                {
+                  text: "Llegamos a tu domicilio",
+                  link: "https://wa.me/573105769818?text=Hola,%20quiero%20agendar%20una%20atención%20médica%20a%20domicilio."
+                },
               ].map((item, index) => (
 
-                <motion.div
-                  key={item}
-                  initial={{
-                    opacity: 0,
-                    x: -60,
-                    scale: 0.95,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    x: 0,
-                    scale: 1,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.3,
-                  }}
-                  transition={{
-                    duration: 0.55,
-                    delay: index * 0.18,
-                    ease: "easeOut",
-                  }}
-                  whileHover={{
-                    scale: 1.03,
-                  }}
-                  className={
-                    index === 0
-                      ? "flex items-center gap-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#19B858] p-4 shadow-[0_18px_45px_rgba(37,211,102,.40)]"
-                      : "flex items-center gap-4 rounded-2xl bg-slate-50 p-4"
-                  }
+                <a
+                  key={item.text}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
                 >
 
-                  <div
+                  <motion.div
+                    initial={{
+                      opacity: 0,
+                      x: -60,
+                      scale: 0.95,
+                    }}
+                    whileInView={{
+                      opacity: 1,
+                      x: 0,
+                      scale: 1,
+                    }}
+                    viewport={{
+                      once: true,
+                      amount: 0.3,
+                    }}
+                    transition={{
+                      duration: 0.55,
+                      delay: index * 0.18,
+                      ease: "easeOut",
+                    }}
+                    whileHover={{
+                      scale: 1.03,
+                    }}
                     className={
                       index === 0
-                        ? "flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/20 font-bold text-white"
-                        : "flex h-11 w-11 items-center justify-center rounded-full bg-[#22C55E] font-bold text-white"
+                        ? "flex items-center gap-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#19B858] p-4 shadow-[0_18px_45px_rgba(37,211,102,.40)] transition-all duration-300"
+                        : "flex items-center gap-4 rounded-2xl bg-slate-50 p-4 transition-all duration-300 hover:bg-[#F4FBF8]"
                     }
                   >
-                    {index + 1}
-                  </div>
 
-                  <p
-                    className={
-                      index === 0
-                        ? "font-semibold text-white"
-                        : "font-medium text-slate-700"
-                    }
-                  >
-                    {item}
-                  </p>
+                    <div
+                      className={
+                        index === 0
+                          ? "flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/20 font-bold text-white"
+                          : "flex h-11 w-11 items-center justify-center rounded-full bg-[#22C55E] font-bold text-white"
+                      }
+                    >
+                      {index + 1}
+                    </div>
 
-                </motion.div>
+                    <p
+                      className={
+                        index === 0
+                          ? "font-semibold text-white"
+                          : "font-medium text-slate-700"
+                      }
+                    >
+                      {item.text}
+                    </p>
+
+                  </motion.div>
+
+                </a>
 
               ))}
 
