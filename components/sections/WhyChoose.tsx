@@ -21,7 +21,6 @@ export function WhyChoose() {
               <video
                 className="h-full w-full object-cover"
                 autoPlay
-                muted
                 loop
                 playsInline
               >
