@@ -10,6 +10,8 @@ import {
   ScanLine,
   Droplets,
   Baby,
+  MessageCircle,
+  ArrowRight,
 } from "lucide-react";
 
 export function Conditions() {
@@ -83,27 +85,23 @@ export function Conditions() {
                 className="group"
               >
                 <motion.div
-                  initial={{
-                    opacity: 0,
-                    y: 40,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.2,
-                  }}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{
                     duration: 0.45,
                     delay: index * 0.08,
                   }}
                   whileHover={{
-                    y: -10,
-                    scale: 1.04,
+                    y: -8,
+                    scale: 1.03,
                   }}
                   className="
+                    flex
+                    min-h-[215px]
+                    flex-col
+                    items-center
+                    justify-between
                     rounded-3xl
                     border
                     border-slate-200
@@ -115,14 +113,28 @@ export function Conditions() {
                     transition-all
                     duration-300
                     cursor-pointer
-                    group-hover:border-[#21C56A]
-                    group-hover:bg-[#F4FFF7]
-                    group-hover:shadow-[0_25px_45px_rgba(33,197,106,.20)]
+                    group-hover:border-[#22C55E]
+                    group-hover:bg-[#F7FFF9]
+                    group-hover:shadow-[0_25px_45px_rgba(34,197,94,.22)]
                   "
                 >
 
+                  {/* ICONO */}
+
                   <motion.div
-                    className="mb-4 flex justify-center"
+                    className="
+                      mb-2
+                      flex
+                      h-16
+                      w-16
+                      items-center
+                      justify-center
+                      rounded-full
+                      bg-[#ECFDF5]
+                      transition-all
+                      duration-300
+                      group-hover:bg-[#22C55E]
+                    "
                     animate={{
                       y: [0, -5, 0],
                     }}
@@ -133,42 +145,66 @@ export function Conditions() {
                       delay: index * 0.2,
                     }}
                     whileHover={{
-                      scale: 1.25,
-                      rotate: 8,
+                      rotate: 10,
+                      scale: 1.15,
                     }}
                   >
                     <Icon
-                      size={36}
+                      size={34}
                       strokeWidth={2.2}
-                      className="text-[#21C56A] transition-colors duration-300 group-hover:text-[#16A34A]"
+                      className="
+                        text-[#22C55E]
+                        transition-all
+                        duration-300
+                        group-hover:text-white
+                      "
                     />
                   </motion.div>
 
-                  <div>
+                  {/* TITULO */}
 
-  <p className="text-[15px] lg:text-[13px] font-medium leading-6 text-slate-700 transition-colors duration-300 group-hover:text-[#15803D]">
-    {item.title}
-  </p>
+                  <p
+                    className="
+                      text-[15px]
+                      lg:text-[13px]
+                      font-semibold
+                      leading-6
+                      text-slate-700
+                      transition-colors
+                      duration-300
+                      group-hover:text-[#15803D]
+                    "
+                  >
+                    {item.title}
+                  </p>
 
-  <motion.p
-    initial={{ opacity: 0, y: 6 }}
-    whileHover={{}}
-    className="
-      mt-2
-      text-[12px]
-      font-semibold
-      text-[#22C55E]
-      opacity-0
-      transition-all
-      duration-300
-      group-hover:translate-y-0
-      group-hover:opacity-100
-    "
-  >
-    💬 Consultar por WhatsApp
-  </motion.p>
+                  {/* BOTÓN */}
 
-</div>
+                  <div
+                    className="
+                      mt-4
+                      flex
+                      items-center
+                      gap-1
+                      rounded-full
+                      bg-[#ECFDF5]
+                      px-3
+                      py-1.5
+                      text-[12px]
+                      font-semibold
+                      text-[#16A34A]
+                      opacity-0
+                      translate-y-2
+                      transition-all
+                      duration-300
+                      group-hover:translate-y-0
+                      group-hover:opacity-100
+                    "
+                  >
+                    <MessageCircle size={14} />
+                    <span>Consultar</span>
+                    <ArrowRight size={13} />
+                  </div>
 
                 </motion.div>
               </a>
