@@ -18,12 +18,13 @@ export function WhyChoose() {
 
             <div className="relative aspect-video overflow-hidden">
 
-              <video
-                className="h-full w-full object-cover"
-                autoPlay
-                loop
-                playsInline
-              >
+            <video
+  className="h-full w-full object-cover"
+  autoPlay
+  muted
+  loop
+  playsInline
+>
                 <source
                   src="/videos/testimonio.mp4"
                   type="video/mp4"
