@@ -144,9 +144,31 @@ export function Conditions() {
                     />
                   </motion.div>
 
-                  <p className="text-[15px] lg:text-[13px] font-medium leading-6 text-slate-700 transition-colors duration-300 group-hover:text-[#15803D]">
-                    {item.title}
-                  </p>
+                  <div>
+
+  <p className="text-[15px] lg:text-[13px] font-medium leading-6 text-slate-700 transition-colors duration-300 group-hover:text-[#15803D]">
+    {item.title}
+  </p>
+
+  <motion.p
+    initial={{ opacity: 0, y: 6 }}
+    whileHover={{}}
+    className="
+      mt-2
+      text-[12px]
+      font-semibold
+      text-[#22C55E]
+      opacity-0
+      transition-all
+      duration-300
+      group-hover:translate-y-0
+      group-hover:opacity-100
+    "
+  >
+    💬 Consultar por WhatsApp
+  </motion.p>
+
+</div>
 
                 </motion.div>
               </a>
