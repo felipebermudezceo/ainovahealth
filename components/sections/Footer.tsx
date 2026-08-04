@@ -85,7 +85,7 @@ py-4 lg:py-5
     <div>
 
       <h3 className="text-xl font-bold text-white">
-        Disponibles 24/7
+        Disponibles 7 dias a la semana
       </h3>
 
       <p className="mt-2 text-white/75 leading-7">
