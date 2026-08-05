@@ -150,7 +150,7 @@ export function HeroContent() {
           <div className="absolute inset-0 rounded-full bg-[#25D366]/50 blur-2xl"></div>
 
           <motion.a
-  href="https://wa.me/573105769818?text=Hola,%20quiero%20agendar%20una%20consulta"
+  href="https://wa.me/573118901570?text=Hola,%20quiero%20agendar%20una%20cita"
   target="_blank"
   rel="noopener noreferrer"
   initial={{ opacity: 0, scale: 0.7 }}
