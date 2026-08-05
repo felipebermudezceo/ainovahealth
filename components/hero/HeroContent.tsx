@@ -23,9 +23,21 @@ export function HeroContent() {
   className="flex justify-center lg:justify-start"
 >
 
-  <div className="inline-flex rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[2px] text-white backdrop-blur-md">
-    Atención médica a domicilio
-  </div>
+<div className="inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-5 py-2 text-xs font-semibold uppercase tracking-[2px] text-white backdrop-blur-md">
+
+<span className="relative flex h-3 w-3">
+
+  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#25D366] opacity-70"></span>
+
+  <span className="relative inline-flex h-3 w-3 rounded-full bg-[#25D366] shadow-[0_0_16px_rgba(37,211,102,1)]"></span>
+
+</span>
+
+<span>
+  Atención médica a domicilio
+</span>
+
+</div>
 
   </motion.div>
 
