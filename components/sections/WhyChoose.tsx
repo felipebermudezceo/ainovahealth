@@ -99,7 +99,7 @@ export function WhyChoose() {
               {[
                 {
                   text: "Escríbenos por WhatsApp",
-                  link: "https://wa.me/573118901570?text=Hola,%20quiero%20solicitar%20un%20médico%20en%20casaahora."
+                  link: "https://wa.me/573118901570?text=Hola,%20quiero%20solicitar%20un%20médico%20en%20casa."
                 },
                 {
                   text: "Cuéntanos qué sucede",
