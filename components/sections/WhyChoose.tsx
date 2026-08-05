@@ -99,19 +99,19 @@ export function WhyChoose() {
               {[
                 {
                   text: "Escríbenos por WhatsApp",
-                  link: "https://wa.me/573105769818?text=Hola,%20quiero%20solicitar%20un%20médico%20a%20domicilio."
+                  link: "https://wa.me/573118901570?text=Hola,%20quiero%20solicitar%20un%20médico%20en%20casaahora."
                 },
                 {
                   text: "Cuéntanos qué sucede",
-                  link: "https://wa.me/573105769818?text=Hola,%20necesito%20orientación%20médica."
+                  link: "https://wa.me/573118901570?text=Hola,%20necesito%20orientación%20médic@."
                 },
                 {
                   text: "Asignamos un médico",
-                  link: "https://wa.me/573105769818?text=Hola,%20quiero%20solicitar%20la%20visita%20de%20un%20médico."
+                  link: "https://wa.me/573118901570?text=Hola,%20quiero%20solicitar%20la%20visita%20de%20un%20especialista."
                 },
                 {
                   text: "Llegamos a tu domicilio",
-                  link: "https://wa.me/573105769818?text=Hola,%20quiero%20agendar%20una%20atención%20médica%20a%20domicilio."
+                  link: "https://wa.me/573118901570?text=Hola,%20quiero%20agendar%20una%20atención%20médica%20a%20domicili@."
                 },
               ].map((item, index) => (
 
