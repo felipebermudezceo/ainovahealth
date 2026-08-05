@@ -79,7 +79,7 @@ export function Conditions() {
             return (
               <a
                 key={item.title}
-                href={`https://wa.me/573105769818?text=${message}`}
+                href={`https://wa.me/573118901570?text=${message}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group"
