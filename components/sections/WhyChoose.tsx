@@ -1,8 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { Volume2 } from "lucide-react";
 
 export function WhyChoose() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+const [soundOn, setSoundOn] = useState(false);
+
+const enableSound = async () => {
+  if (!videoRef.current) return;
+
+  videoRef.current.muted = false;
+  videoRef.current.volume = 1;
+
+  try {
+    await videoRef.current.play();
+    setSoundOn(true);
+  } catch (error) {
+    console.error(error);
+  }
+};
   return (
     <section
       id="como-funciona"
@@ -16,22 +34,43 @@ export function WhyChoose() {
 
           <div className="overflow-hidden rounded-[30px] bg-white shadow-[0_20px_60px_rgba(0,0,0,.08)]">
 
-            <div className="relative aspect-video overflow-hidden">
+          <div className="relative aspect-video overflow-hidden">
 
-              <video
-                className="h-full w-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-              >
-                <source
-                  src="/videos/testimonio.mp4"
-                  type="video/mp4"
-                />
-              </video>
+<video
+  ref={videoRef}
+  className="h-full w-full object-cover"
+  autoPlay
+  muted
+  loop
+  playsInline
+>
+  <source
+    src="/videos/testimonio.mp4"
+    type="video/mp4"
+  />
+</video>
 
-            </div>
+{!soundOn && (
+  <button
+    onClick={enableSound}
+    className="absolute inset-0 flex items-center justify-center bg-black/20 transition hover:bg-black/30"
+  >
+    <div className="flex items-center gap-3 rounded-full bg-white/95 px-6 py-3 shadow-xl backdrop-blur-md">
+
+      <Volume2
+        className="text-[#25D366]"
+        size={22}
+      />
+
+      <span className="font-semibold text-slate-900">
+        Escuchar testimonio
+      </span>
+
+    </div>
+  </button>
+)}
+
+</div>
 
             <div className="bg-white p-6 text-center">
 
