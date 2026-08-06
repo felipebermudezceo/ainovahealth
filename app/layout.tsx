@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,6 +33,19 @@ export default function RootLayout({
       <GoogleTagManager gtmId="GTM-5MKF9RB8" />
 
       <body className="min-h-full flex flex-col">
+        <Script id="clixtell-tracking" strategy="afterInteractive">
+          {`
+            (function() {
+              var script = document.createElement('script');
+              var prefix = document.location.protocol;
+              script.async = true;
+              script.type = 'text/javascript';
+              script.src = prefix + '//scripts.clixtell.com/track.js';
+              document.head.appendChild(script);
+            })();
+          `}
+        </Script>
+
         {children}
       </body>
     </html>
