@@ -201,7 +201,7 @@ export function HeroContent() {
           </div>
 
           <div className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[13px] text-white backdrop-blur-md">
-            Sin desplazamientos
+          Vamos hasta tu hogar
           </div>
 
           <div className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[13px] text-white backdrop-blur-md">
