@@ -197,7 +197,7 @@ py-4 lg:py-5
     </h3>
 
     <p className="mt-3 text-center leading-7 text-white/80">
-      Bogotá y municipios cercanos.
+      Bogotá y Medellin.
       Llegamos directamente hasta tu hogar.
     </p>
 

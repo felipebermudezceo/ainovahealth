@@ -57,56 +57,111 @@ export function HeroContent() {
   <div className="hidden lg:block">
 
     <span className="block text-[72px] font-black text-white">
-      Médico
+    ¿Necesitas un
     </span>
 
     <span className="block text-[72px] font-black text-white">
-      en Casa
+    médico hoy?
     </span>
 
-    <div className="mt-2 flex items-center gap-5">
+    <div className="mt-6">
 
-    <span className="text-[30px] font-black text-[#25D366]">
-  60–90 min
-</span>
+  <div className="flex items-center gap-8">
 
-      <svg
-        width="150"
-        height="45"
-        viewBox="0 0 180 60"
-        fill="none"
-      >
-        <path
-          d="M0 30 H40 L55 30 L68 12 L80 48 L93 8 L108 30 H180"
-          stroke="#25D366"
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+    <div className="h-[2px] w-[230px] rounded-full bg-[#25D366]/80"></div>
 
-    </div>
+    <svg
+      width="90"
+      height="32"
+      viewBox="0 0 120 40"
+      fill="none"
+      className="shrink-0"
+    >
+      <path
+        d="M0 20
+           H28
+           L38 8
+           L48 32
+           L58 5
+           L68 20
+           H120"
+        stroke="#25D366"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+
+  </div>
+
+  <h2 className="mt-6 text-[32px] font-semibold leading-tight text-white">
+
+    Atención médica a domicilio en{" "}
+
+    <span className="font-black text-[#25D366] uppercase tracking-wide">
+      BOGOTÁ Y MEDELLÍN
+    </span>
+
+  </h2>
+
+</div>
 
   </div>
 
   {/* MÓVIL */}
 
-  <div className="text-center lg:hidden">
+<div className="text-center lg:hidden">
 
-<span className="block text-[54px] font-black text-white">
-  Médico
+<span className="block text-[52px] font-black leading-[0.95] text-white">
+  ¿Necesitas un
 </span>
 
-<span className="block text-[54px] font-black text-white">
-  en Casa
+<span className="block text-[52px] font-black leading-[0.95] text-white">
+  médico hoy?
 </span>
 
-<div className="mt-5 flex justify-center">
+{/* Línea + ECG */}
 
-<span className="text-[40px] font-black text-[#25D366]">
-  60–90 min
-</span>
+<div className="mt-6 flex items-center justify-center gap-3">
 
+  <div className="h-[2px] w-[80px] rounded-full bg-[#25D366]/80"></div>
+
+  <svg
+    width="70"
+    height="24"
+    viewBox="0 0 120 40"
+    fill="none"
+  >
+    <path
+      d="M0 20
+         H28
+         L38 8
+         L48 32
+         L58 5
+         L68 20
+         H120"
+      stroke="#25D366"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+
+  <div className="h-[2px] w-[80px] rounded-full bg-[#25D366]/80"></div>
+
+</div>
+
+{/* Subtítulo */}
+
+<div className="mt-6">
+
+  <p className="text-[24px] font-semibold leading-tight text-white">
+    Atención médica a domicilio en
+  </p>
+
+  <p className="mt-2 text-[34px] font-black uppercase leading-none text-[#25D366]">
+    Bogotá y Medellín
+  </p>
 
 </div>
 

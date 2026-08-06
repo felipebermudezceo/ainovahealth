@@ -34,7 +34,7 @@ export function FooterInfo() {
               </p>
 
               <p className="mt-1 text-slate-500">
-                Bogotá y municipios cercanos
+                Bogotá y Medellin
               </p>
 
             </div>
