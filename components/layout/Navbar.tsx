@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -41,25 +42,23 @@ export function Navbar() {
 
         <Link
   href="/"
-  className="ml-2 text-[28px] font-black tracking-tight lg:ml-0 lg:text-[34px]"
+  className="ml-2 lg:ml-0 flex items-center"
 >
-
-  <span className="text-slate-900">
-    Ainova
-  </span>
-
-  <span
+  <Image
+    src="/images/logoAinovaHealth.png"
+    alt="AinovaHealth"
+    width={2000}
+    height={500}
+    priority
     className="
-      text-[#25D366]
-      drop-shadow-[0_0_8px_rgba(37,211,102,.55)]
-      transition-all
-      duration-300
-      hover:drop-shadow-[0_0_16px_rgba(37,211,102,.9)]
-    "
-  >
-    Health
-  </span>
-
+  h-[52px]
+  w-auto
+  lg:h-[66px]
+  transition-all
+  duration-300
+  hover:scale-[1.02]
+"
+  />
 </Link>
 
         {/* MENU */}
@@ -89,7 +88,7 @@ export function Navbar() {
   <div className="absolute -bottom-3 left-1/2 h-8 w-[85%] -translate-x-1/2 rounded-full bg-[#25D366]/60 blur-xl"></div>
 
   <a
-  href="https://wa.me/573105769818?text=Hola,%20quiero%20agendar%20una%20consulta"
+  href="https://wa.me/573118901570?text=Hola,%20quiero%20agendar%20una%20cita"
   target="_blank"
   rel="noopener noreferrer"
   className="relative flex h-[58px] items-center gap-3 rounded-full bg-gradient-to-r from-[#25D366] to-[#17B857] px-8 text-[15px] font-bold text-white shadow-[0_18px_40px_rgba(37,211,102,.45)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_22px_55px_rgba(37,211,102,.55)]"
