@@ -8,7 +8,6 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { FooterInfo } from "@/components/sections/FooterInfo";
 import { Footer } from "@/components/sections/Footer";
 import { FloatingWhatsapp } from "@/components/ui/FloatingWhatsapp";
-import { FadeIn } from "@/components/ui/FadeIn";
 
 export default function Home() {
   return (
@@ -16,33 +15,20 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-<FadeIn>
-  <Stats />
-</FadeIn>
+      <Stats />
 
-<FadeIn>
-  <Conditions />
-</FadeIn>
+      <Conditions />
 
-<FadeIn>
-  <WhyChoose />
-</FadeIn>
+      <WhyChoose />
 
-<FadeIn>
-  <CTA />
-</FadeIn>
+      <CTA />
 
-<FadeIn>
-  <Testimonials />
-</FadeIn>
+      <Testimonials />
 
-<FadeIn>
-  <FooterInfo />
-</FadeIn>
+      <FooterInfo />
 
-<FadeIn>
-  <Footer />
-</FadeIn>
+      <Footer />
+
       <FloatingWhatsapp />
     </main>
   );
