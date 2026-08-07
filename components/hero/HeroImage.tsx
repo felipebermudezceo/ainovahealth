@@ -83,46 +83,66 @@ export function HeroImage() {
 
       <div className="relative h-[340px] lg:h-[760px]">
 
-        <Image
-          src="/images/hero/medico-en-casa.webp"
-          alt="Médico en casa"
-          fill
-          priority
-          className="object-cover object-[54%_25%] lg:object-[58%_center]"
-        />
+  {/* Imagen Desktop */}
+<Image
+  src="/images/hero/medico-en-casa.webp"
+  alt="Médico en casa"
+  fill
+  priority
+  className="
+    hidden
+    lg:block
+    object-cover
+    object-[58%_center]
+  "
+/>
 
-        {/* Degradado Desktop */}
+{/* Imagen Mobile */}
+<Image
+  src="/images/hero/medico-en-casa-mobile.jpg"
+  alt="Médico en casa"
+  fill
+  priority
+  className="
+    block
+    lg:hidden
+    object-cover
+    object-center
+  "
+/>
 
-        <div
-          className="
-            absolute
-            inset-0
-            hidden
-            lg:block
-            bg-gradient-to-r
-            from-[#0C5663]
-            via-[#0C5663]/65
-            via-[28%]
-            to-transparent
-          "
-        />
+  {/* Degradado Desktop */}
 
-        {/* Degradado Mobile */}
+  <div
+    className="
+      absolute
+      inset-0
+      hidden
+      lg:block
+      bg-gradient-to-r
+      from-[#0C5663]
+      via-[#0C5663]/65
+      via-[28%]
+      to-transparent
+    "
+  />
 
-        <div
-          className="
-            absolute
-            inset-0
-            lg:hidden
-            bg-gradient-to-b
-            from-[#0C5663]
-            via-[#0C5663]/45
-            via-[30%]
-            to-transparent
-          "
-        />
+  {/* Degradado Mobile */}
 
-      </div>
+  <div
+    className="
+      absolute
+      inset-0
+      lg:hidden
+      bg-gradient-to-b
+      from-[#0C5663]
+      via-[#0C5663]/45
+      via-[30%]
+      to-transparent
+    "
+  />
+
+</div>
 
       {/* Tarjeta flotante */}
 
