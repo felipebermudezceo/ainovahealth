@@ -11,9 +11,9 @@ export function HeroContent() {
         duration: 0.9,
         ease: "easeOut",
       }}
-      className="flex justify-center"
+      className="flex justify-center items-center"
     >
-      <div className="w-full max-w-[620px] px-6 py-8 lg:px-16 lg:py-20">
+      <div className="w-full max-w-[620px] px-5 pt-8 pb-10 lg:px-16 lg:py-20">
 
         {/* Badge */}
         <motion.div
@@ -68,7 +68,7 @@ export function HeroContent() {
 
   <div className="flex items-center gap-8">
 
-    <div className="h-[2px] w-[230px] rounded-full bg-[#25D366]/80"></div>
+    <div className="h-[2px] w-[170px] lg:w-[230px] rounded-full bg-[#25D366]/80"></div>
 
     <svg
       width="90"
@@ -178,7 +178,22 @@ export function HeroContent() {
     delay: 0.45,
     duration: 0.6,
   }}
-  className="mx-auto mt-4 max-w-[520px] text-center text-[18px] leading-7 text-white/90 lg:text-left lg:text-[22px] lg:leading-9"
+  className="
+mx-auto
+mt-5
+max-w-[310px]
+text-center
+text-[16px]
+leading-7
+font-medium
+text-white/90
+lg:mx-0
+lg:mt-4
+lg:max-w-[520px]
+lg:text-left
+lg:text-[22px]
+lg:leading-9
+"
 >
           Recibe atención médica profesional en la comodidad de tu hogar.
           Atención rápida, segura y sin desplazamientos.
@@ -193,20 +208,76 @@ export function HeroContent() {
     delay: 0.6,
     duration: 0.5,
   }}
-  className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start"
+  className="
+mt-7
+flex
+flex-wrap
+justify-center
+gap-4
+lg:mt-8
+lg:justify-start
+"
 >
 
-          <div className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[13px] text-white backdrop-blur-md">
-            Sin filas
-          </div>
+<div
+  className="
+    rounded-full
+    border
+    border-white/20
+    bg-white/10
+    px-5
+    py-[11px]
+    text-[14px]
+    font-medium
+    text-white
+    backdrop-blur-md
+    lg:px-4
+    lg:py-2
+    lg:text-[13px]
+  "
+>
+  Sin filas
+</div>
 
-          <div className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[13px] text-white backdrop-blur-md">
-          Vamos hasta tu hogar
-          </div>
+<div
+  className="
+    rounded-full
+    border
+    border-white/20
+    bg-white/10
+    px-5
+    py-[11px]
+    text-[14px]
+    font-medium
+    text-white
+    backdrop-blur-md
+    lg:px-4
+    lg:py-2
+    lg:text-[13px]
+  "
+>
+  Vamos hasta tu hogar
+</div>
 
-          <div className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[13px] text-white backdrop-blur-md">
-            Atención inmediata
-          </div>
+<div
+  className="
+    rounded-full
+    border
+    border-white/20
+    bg-white/10
+    px-5
+    py-[11px]
+    text-[14px]
+    font-medium
+    text-white
+    backdrop-blur-md
+    lg:px-4
+    lg:py-2
+    lg:text-[13px]
+  "
+>
+  Atención inmediata
+</div>
 
           </motion.div>
 
@@ -214,7 +285,7 @@ export function HeroContent() {
 
         <div className="relative mt-6 w-full lg:w-fit">
 
-          <div className="absolute inset-0 rounded-full bg-[#25D366]/50 blur-2xl"></div>
+        <div className="pointer-events-none absolute inset-0 rounded-full bg-[#25D366]/45 blur-2xl"></div>
 
           <motion.a
   href="https://wa.me/573118901570?text=Hola,%20quiero%20agendar%20una%20cita"
@@ -242,7 +313,7 @@ export function HeroContent() {
     relative
     flex
     w-full
-    max-w-[360px]
+    max-w-[380px]
     mx-auto
     lg:mx-0
     lg:w-auto
@@ -256,17 +327,17 @@ export function HeroContent() {
     from-[#31DD6E]/90
     to-[#19B858]/90
     px-6
-    py-4
+    py-5
     shadow-[0_20px_45px_rgba(37,211,102,.35)]
   "
 >
 
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10">
-              <FaWhatsapp className="text-[28px] text-white" />
+            <div className="flex h-14 w-14 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-white/10">
+              <FaWhatsapp className="text-[31px] lg:text-[28px] text-white" />
             </div>
 
             <div className="text-left">
-              <p className="text-[18px] font-bold text-white">
+              <p className="text-[20px] lg:text-[18px] font-bold text-white">
                 Solicitar Médico Ahora
               </p>
 
