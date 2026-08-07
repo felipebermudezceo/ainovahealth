@@ -127,7 +127,21 @@ export function HeroImage() {
       {/* Tarjeta flotante */}
 
       <motion.div
-        className="absolute top-5 left-4 lg:left-auto lg:right-8"
+        className="
+        fixed
+        bottom-5
+        left-4
+        z-40
+        
+        w-[255px]
+        
+        lg:absolute
+        lg:top-5
+        lg:bottom-auto
+        lg:left-auto
+        lg:right-8
+        lg:w-auto
+        "
         animate={{
           y: [0, -10, 0],
         }}
@@ -138,7 +152,27 @@ export function HeroImage() {
         }}
       >
 
-<div className="rounded-[18px] lg:rounded-[24px] border border-white/20 bg-white/30 px-4 py-3 lg:px-5 lg:py-4 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,.18)] min-w-[230px] lg:min-w-[250px]">
+<div className="
+rounded-[18px]
+lg:rounded-[24px]
+
+border
+border-white/30
+
+bg-white/88
+backdrop-blur-2xl
+
+px-3
+py-3
+
+lg:px-5
+lg:py-4
+
+shadow-[0_18px_50px_rgba(15,23,42,.15)]
+
+min-w-[255px]
+lg:min-w-[250px]
+">
 
 <AnimatePresence mode="wait">
 
@@ -191,7 +225,20 @@ export function HeroImage() {
 
           <div className="flex items-center gap-4">
 
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white shadow-md">
+            <div className="
+flex
+h-10
+w-10
+
+lg:h-11
+lg:w-11
+
+items-center
+justify-center
+rounded-xl
+bg-white
+shadow-md
+">
 
               <Icon
                 className={`h-5 w-5 ${cards[current].color}`}
@@ -201,19 +248,20 @@ export function HeroImage() {
 
             <div>
 
-              <p className="text-[17px] lg:text-[18px] font-black text-slate-900">
+              <p className="text-[15px] lg:text-[18px]
+font-black font-black text-slate-900">
 
                 {cards[current].title}
 
               </p>
 
-              <p className="text-[14px] font-medium text-[#0C5663]">
+              <p className="text-[13px] lg:text-[14px] font-medium text-[#0C5663]">
 
                 {cards[current].subtitle}
 
               </p>
 
-              <p className="mt-1 text-[12px] text-slate-500">
+              <p className="mt-1 text-[11px] lg:text-[12px] text-slate-500">
 
                 {cards[current].time}
 
