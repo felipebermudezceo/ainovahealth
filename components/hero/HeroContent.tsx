@@ -110,14 +110,18 @@ export function HeroContent() {
 
   {/* MÓVIL */}
 
-<div className="text-center lg:hidden">
+  <div className="text-center lg:hidden">
 
 <span className="block text-[52px] font-black leading-[0.95] text-white">
-  ¿Necesitas un
+  ¿Necesitas
 </span>
 
 <span className="block text-[52px] font-black leading-[0.95] text-white">
-  médico hoy?
+  un médico
+</span>
+
+<span className="block text-[52px] font-black leading-[0.95] text-white">
+  hoy?
 </span>
 
 {/* Línea + ECG */}
@@ -283,11 +287,11 @@ lg:justify-start
 
         {/* Botón */}
 
-        <div className="relative mt-6 w-full lg:w-fit">
+<div className="relative mt-6 w-full lg:w-fit">
 
-        <div className="pointer-events-none absolute inset-0 rounded-full bg-[#25D366]/45 blur-2xl"></div>
+<div className="pointer-events-none absolute inset-0 rounded-full bg-[#25D366]/45 blur-2xl"></div>
 
-          <motion.a
+<motion.a
   href="https://wa.me/573118901570?text=Hola,%20quiero%20agendar%20una%20cita"
   target="_blank"
   rel="noopener noreferrer"
@@ -313,43 +317,52 @@ lg:justify-start
     relative
     flex
     w-full
-    max-w-[380px]
+    max-w-[320px]
     mx-auto
+
+    lg:max-w-[380px]
     lg:mx-0
     lg:w-auto
+
     items-center
     justify-center
     gap-3
+
     rounded-full
     border
     border-[#B9FFD0]
+
     bg-gradient-to-b
     from-[#31DD6E]/90
     to-[#19B858]/90
-    px-6
-    py-5
+
+    px-5
+    py-3
+
+    lg:px-6
+    lg:py-5
+
     shadow-[0_20px_45px_rgba(37,211,102,.35)]
   "
 >
 
-            <div className="flex h-14 w-14 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-white/10">
-              <FaWhatsapp className="text-[31px] lg:text-[28px] text-white" />
-            </div>
+  <div className="flex h-10 w-10 lg:h-14 lg:w-14 items-center justify-center rounded-full bg-white/10">
+    <FaWhatsapp className="text-[24px] lg:text-[31px] text-white" />
+  </div>
 
-            <div className="text-left">
-              <p className="text-[20px] lg:text-[18px] font-bold text-white">
-                Solicitar Médico Ahora
-              </p>
+  <div className="text-left">
+    <p className="text-[16px] lg:text-[20px] font-bold text-white">
+      Solicitar Médico Ahora
+    </p>
 
-              <p className="text-[13px] text-white/90">
-                Respuesta inmediata por WhatsApp
-              </p>
-            </div>
+    <p className="text-[12px] lg:text-[13px] text-white/90">
+      Respuesta inmediata por WhatsApp
+    </p>
+  </div>
 
-            </motion.a>
-          
+</motion.a>
 
-        </div>
+</div>
 
       </div>
       </motion.div>

@@ -34,39 +34,64 @@ export function Footer() {
 
   {/* BOTÓN */}
 
-  <button
-    className="
-      mt-10
-      flex
-      items-center
-      gap-4
-      rounded-full
-      bg-[#25D366]
-      px-6 lg:px-8
-py-4 lg:py-5
-      shadow-[0_20px_50px_rgba(37,211,102,.45)]
-      transition
-      hover:scale-[1.03]
-    "
-  >
+<button
+  className="
+    mt-10
+    relative
+    flex
 
-    <div className="text-[34px]">
-      💬
-    </div>
+    w-full
+    max-w-[320px]
+    mx-auto
 
-    <div>
+    lg:w-auto
+    lg:max-w-none
 
-      <p className="text-left text-[18px] lg:text-[22px] font-bold text-white">
-        Solicitar Médico Ahora
-      </p>
+    items-center
+    justify-center
+    gap-3
 
-      <p className="text-left text-white/80">
-        Respuesta inmediata
-      </p>
+    rounded-full
 
-    </div>
+    border
+    border-[#B9FFD0]
 
-  </button>
+    bg-gradient-to-b
+    from-[#31DD6E]/90
+    to-[#19B858]/90
+
+    px-5
+    py-3
+
+    lg:px-8
+    lg:py-5
+
+    shadow-[0_20px_45px_rgba(37,211,102,.35)]
+
+    transition-all
+    duration-300
+
+    hover:scale-[1.03]
+  "
+>
+
+  <div className="flex h-10 w-10 lg:h-14 lg:w-14 items-center justify-center rounded-full bg-white/10">
+    <span className="text-[24px] lg:text-[32px]">💬</span>
+  </div>
+
+  <div className="text-left">
+
+    <p className="text-[16px] lg:text-[22px] font-bold text-white">
+      Solicitar Médico Ahora
+    </p>
+
+    <p className="text-[12px] lg:text-[15px] text-white/90">
+      Respuesta inmediata por WhatsApp
+    </p>
+
+  </div>
+
+</button>
 
 </div>
 

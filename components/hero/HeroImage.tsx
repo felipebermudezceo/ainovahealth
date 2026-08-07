@@ -130,17 +130,19 @@ export function HeroImage() {
   {/* Degradado Mobile */}
 
   <div
-    className="
-      absolute
-      inset-0
-      lg:hidden
-      bg-gradient-to-b
-      from-[#0C5663]
-      via-[#0C5663]/45
-      via-[30%]
-      to-transparent
-    "
-  />
+  className="
+    absolute
+    top-0
+    left-0
+    right-0
+    h-[180px]
+    lg:hidden
+    bg-gradient-to-b
+    from-[#0C5663]/90
+    via-[#0C5663]/40
+    to-transparent
+  "
+/>
 
 </div>
 
