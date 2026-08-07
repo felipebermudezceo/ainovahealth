@@ -2,8 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
+
+const SERVICE_ROUTES = [
+  "/laboratorios",
+  "/enfermeria",
+  "/vacunacion",
+  "/telemedicina",
+];
 
 const menu = [
   {
@@ -13,6 +21,16 @@ const menu = [
   {
     name: "Servicios",
     href: "#servicios",
+    children: [
+      {
+        name: "Médico a domicilio",
+        href: "/",
+      },
+      {
+        name: "Laboratorios Clínicos",
+        href: "/laboratorios",
+      },
+    ],
   },
   {
     name: "¿Cómo funciona?",
@@ -34,6 +52,17 @@ const menu = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isServicesActive = SERVICE_ROUTES.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`)
+  );
+
+  const servicesTriggerClass = isServicesActive
+    ? "bg-[#25D366]/15 text-[#25D366] hover:bg-[#25D366]/20"
+    : "bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/15";
+
   return (
     <header className="fixed top-0 left-0 z-50 w-full">
       <div className="mx-auto mt-4 flex h-[74px] max-w-[1320px] items-center justify-between rounded-full bg-white px-5 lg:mt-6 lg:h-[84px] lg:px-10 shadow-[0_15px_45px_rgba(15,23,42,.08)]">
@@ -66,13 +95,44 @@ export function Navbar() {
         <nav className="hidden lg:block">
           <ul className="flex items-center gap-10">
           {menu.map((item) => (
-  <li key={item.name}>
-    <a
-      href={item.href}
-      className="text-[15px] font-semibold text-slate-700 transition duration-200 hover:text-emerald-600"
-    >
-      {item.name}
-    </a>
+  <li key={item.name} className={item.children ? "relative group" : ""}>
+    {item.children ? (
+      <>
+        <button
+          type="button"
+          className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-[15px] font-semibold transition-all duration-300 ${servicesTriggerClass}`}
+        >
+          {item.name}
+          <ChevronDown className="h-4 w-4 transition duration-300 group-hover:rotate-180" />
+        </button>
+
+        <div className="invisible absolute top-full left-1/2 z-50 pt-3 opacity-0 -translate-x-1/2 translate-y-2 transition-all duration-300 ease-out group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+          <ul className="min-w-[250px] overflow-hidden rounded-2xl border border-slate-100 bg-white p-2 shadow-[0_20px_50px_rgba(15,23,42,.10)]">
+            {item.children.map((child) => (
+              <li key={child.name}>
+                <Link
+                  href={child.href}
+                  className={`block rounded-xl px-4 py-3 text-[15px] font-semibold transition-all duration-200 ${
+                    pathname === child.href
+                      ? "bg-[#25D366]/10 text-[#25D366]"
+                      : "text-slate-700 hover:bg-[#25D366]/8 hover:text-[#25D366]"
+                  }`}
+                >
+                  {child.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </>
+    ) : (
+      <a
+        href={item.href}
+        className="text-[15px] font-semibold text-slate-700 transition duration-200 hover:text-emerald-600"
+      >
+        {item.name}
+      </a>
+    )}
   </li>
 ))}
                   
@@ -137,13 +197,51 @@ export function Navbar() {
     <ul className="space-y-5">
       {menu.map((item) => (
         <li key={item.name}>
-          <a
-            href={item.href}
-            onClick={() => setOpen(false)}
-            className="block text-lg font-semibold text-slate-700"
-          >
-            {item.name}
-          </a>
+          {item.children ? (
+            <>
+              <button
+                type="button"
+                onClick={() => setServicesOpen(!servicesOpen)}
+                className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-lg font-semibold transition-all duration-300 ${servicesTriggerClass}`}
+              >
+                {item.name}
+                <ChevronDown
+                  className={`h-5 w-5 transition duration-300 ${servicesOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {servicesOpen && (
+                <ul className="mt-3 space-y-2 border-l-2 border-[#25D366]/20 pl-4">
+                  {item.children.map((child) => (
+                    <li key={child.name}>
+                      <Link
+                        href={child.href}
+                        onClick={() => {
+                          setOpen(false);
+                          setServicesOpen(false);
+                        }}
+                        className={`block rounded-xl px-3 py-2.5 text-base font-semibold transition-all duration-200 ${
+                          pathname === child.href
+                            ? "bg-[#25D366]/10 text-[#25D366]"
+                            : "text-slate-700 hover:bg-[#25D366]/8 hover:text-[#25D366]"
+                        }`}
+                      >
+                        {child.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
+          ) : (
+            <a
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="block text-lg font-semibold text-slate-700"
+            >
+              {item.name}
+            </a>
+          )}
         </li>
       ))}
     </ul>

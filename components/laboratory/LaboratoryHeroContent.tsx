@@ -2,7 +2,7 @@
 import { FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-export function HeroContent() {
+export function LaboratoryHeroContent() {
   return (
     <motion.div
       initial={{ opacity: 0, x: -80 }}
@@ -11,9 +11,9 @@ export function HeroContent() {
         duration: 0.9,
         ease: "easeOut",
       }}
-      className="flex justify-center items-center"
+      className="flex h-full min-h-0 items-center justify-center lg:h-[760px]"
     >
-      <div className="w-full max-w-[620px] px-5 pt-6 pb-6 lg:px-16 lg:py-20">
+      <div className="w-full max-w-[620px] px-5 pt-8 pb-10 lg:px-16 lg:py-0">
 
         {/* Badge */}
         <motion.div
@@ -34,7 +34,7 @@ export function HeroContent() {
 </span>
 
 <span>
-  Atención médica a domicilio
+  🧪 Laboratorios Clínicos a Domicilio
 </span>
 
 </div>
@@ -43,7 +43,7 @@ export function HeroContent() {
 
         {/* Título */}
         <motion.h1
-  className="mt-4 leading-none lg:mt-6"
+  className="mt-4 leading-none"
   initial={{ opacity: 0, x: -50 }}
   animate={{ opacity: 1, x: 0 }}
   transition={{
@@ -56,23 +56,23 @@ export function HeroContent() {
 
   <div className="hidden lg:block">
 
-    <span className="block text-[72px] font-black text-white">
-    ¿Necesitas un
-    </span>
+  <span className="block text-[51px] font-black leading-[1.08] tracking-[-0.02em] text-white">
+    Tus exámenes de laboratorio
+  </span>
 
-    <span className="block text-[72px] font-black text-white">
-    médico hoy?
-    </span>
+  <span className="mt-0.5 block text-[47px] font-black leading-[1.08] tracking-[-0.02em] text-[#25D366]">
+    sin salir de casa.
+  </span>
 
-    <div className="mt-6">
+    <div className="mt-4">
 
-  <div className="flex items-center gap-8">
+  <div className="flex items-center gap-5">
 
-    <div className="h-[2px] w-[170px] lg:w-[230px] rounded-full bg-[#25D366]/80"></div>
+    <div className="h-[2px] w-[155px] lg:w-[182px] rounded-full bg-[#25D366]/80"></div>
 
     <svg
-      width="90"
-      height="32"
+      width="73"
+      height="25"
       viewBox="0 0 120 40"
       fill="none"
       className="shrink-0"
@@ -94,9 +94,9 @@ export function HeroContent() {
 
   </div>
 
-  <h2 className="mt-6 text-[32px] font-semibold leading-tight text-white">
+  <h2 className="mt-4 max-w-[400px] text-[33px] font-semibold leading-[1.32] text-white">
 
-    Atención médica a domicilio en{" "}
+    Resultados rápidos y atención segura en{" "}
 
     <span className="font-black text-[#25D366] uppercase tracking-wide">
       BOGOTÁ Y MEDELLÍN
@@ -110,14 +110,14 @@ export function HeroContent() {
 
   {/* MÓVIL */}
 
-  <div className="mx-auto max-w-[340px] text-center lg:hidden">
+  <div className="text-center lg:hidden">
 
-<span className="block text-[40px] font-black leading-[1.08] tracking-[-0.02em] text-white">
-  ¿Necesitas
+<span className="block text-[36px] font-black leading-[1.1] tracking-[-0.02em] text-white">
+  Tus exámenes de laboratorio
 </span>
 
-<span className="block text-[38px] font-black leading-[1.08] tracking-[-0.02em] text-white">
-  un médico hoy?
+<span className="mt-0.5 block text-[34px] font-black leading-[1.1] tracking-[-0.02em] text-[#25D366]">
+  sin salir de casa.
 </span>
 
 {/* Línea + ECG */}
@@ -155,11 +155,13 @@ export function HeroContent() {
 
 <div className="mt-4">
 
-  <p className="mx-auto max-w-[340px] text-[19px] font-semibold leading-[1.35] text-white">
-    Atención médica a domicilio en
+  <p className="mx-auto max-w-[292px] text-[20px] font-semibold leading-[1.38] text-white">
+    Resultados rápidos y atención
+    <br />
+    segura en
   </p>
 
-  <p className="mx-auto mt-1.5 max-w-[340px] text-[24px] font-black uppercase leading-[1.18] text-[#25D366]">
+  <p className="mx-auto mt-1.5 max-w-[292px] text-[24px] font-black uppercase leading-[1.18] text-[#25D366]">
     BOGOTÁ Y MEDELLÍN
   </p>
 
@@ -181,22 +183,23 @@ export function HeroContent() {
   className="
 mx-auto
 mt-3
-max-w-[280px]
+max-w-[255px]
+hidden
 text-center
 text-[13px]
 leading-[1.72]
 font-medium
-text-white/90
+text-white/80
+lg:block
 lg:mx-0
-lg:mt-4
-lg:max-w-[520px]
+lg:mt-3
+lg:max-w-[365px]
 lg:text-left
-lg:text-[22px]
-lg:leading-9
+lg:text-[15px]
+lg:leading-[1.78]
 "
 >
-          Recibe atención médica profesional en la comodidad de tu hogar.
-          Atención rápida, segura y sin desplazamientos.
+          Toma de muestras a domicilio por personal certificado.
           </motion.p>
 
         {/* Chips */}
@@ -209,13 +212,12 @@ lg:leading-9
     duration: 0.5,
   }}
   className="
-mt-4
+mt-[28px]
 flex
 flex-wrap
 justify-center
 gap-2
-lg:mt-8
-lg:gap-4
+lg:mt-[28px]
 lg:justify-start
 "
 >
@@ -232,13 +234,12 @@ lg:justify-start
     font-medium
     text-white/90
     backdrop-blur-md
-    lg:px-4
-    lg:py-2
-    lg:text-[13px]
-    lg:text-white
+    lg:px-2.5
+    lg:py-1
+    lg:text-[10px]
   "
 >
-  Sin filas
+  ✓ Sin filas
 </div>
 
 <div
@@ -253,13 +254,12 @@ lg:justify-start
     font-medium
     text-white/90
     backdrop-blur-md
-    lg:px-4
-    lg:py-2
-    lg:text-[13px]
-    lg:text-white
+    lg:px-2.5
+    lg:py-1
+    lg:text-[10px]
   "
 >
-  Vamos hasta tu hogar
+  ✓ Vamos hasta tu hogar
 </div>
 
 <div
@@ -274,20 +274,19 @@ lg:justify-start
     font-medium
     text-white/90
     backdrop-blur-md
-    lg:px-4
-    lg:py-2
-    lg:text-[13px]
-    lg:text-white
+    lg:px-2.5
+    lg:py-1
+    lg:text-[10px]
   "
 >
-  Atención inmediata
+  ✓ Resultados digitales
 </div>
 
           </motion.div>
 
         {/* Botón */}
 
-<div className="relative mt-4 w-full lg:mt-6 lg:w-fit">
+<div className="relative mt-5 w-full lg:mt-5 lg:w-fit">
 
 <div className="pointer-events-none absolute inset-0 rounded-full bg-[#25D366]/45 blur-2xl"></div>
 
@@ -317,10 +316,10 @@ lg:justify-start
     relative
     flex
     w-full
-    max-w-[320px]
+    max-w-[400px]
     mx-auto
 
-    lg:max-w-[380px]
+    lg:max-w-[480px]
     lg:mx-0
     lg:w-auto
 
@@ -336,26 +335,26 @@ lg:justify-start
     from-[#31DD6E]/90
     to-[#19B858]/90
 
-    px-5
+    px-7
     py-3
 
-    lg:px-6
+    lg:px-9
     lg:py-5
 
     shadow-[0_20px_45px_rgba(37,211,102,.35)]
   "
 >
 
-  <div className="flex h-10 w-10 lg:h-14 lg:w-14 items-center justify-center rounded-full bg-white/10">
-    <FaWhatsapp className="text-[24px] lg:text-[31px] text-white" />
+  <div className="flex h-10 w-10 lg:h-[54px] lg:w-[54px] items-center justify-center rounded-full bg-white/10">
+    <FaWhatsapp className="text-[22px] lg:text-[28px] text-white" />
   </div>
 
   <div className="text-left">
-    <p className="text-[16px] lg:text-[20px] font-bold text-white">
-      Solicitar Médico Ahora
+    <p className="text-[15px] lg:text-[18px] font-bold text-white">
+      Solicitar Toma de Muestra
     </p>
 
-    <p className="text-[12px] lg:text-[13px] text-white/90">
+    <p className="text-[11px] lg:text-[12px] text-white/90">
       Respuesta inmediata por WhatsApp
     </p>
   </div>
