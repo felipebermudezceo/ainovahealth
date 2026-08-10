@@ -1,26 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef, useState } from "react";
-import { Volume2 } from "lucide-react";
+import Image from "next/image";
 
 export function WhyChoose() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-const [soundOn, setSoundOn] = useState(false);
-
-const enableSound = async () => {
-  if (!videoRef.current) return;
-
-  videoRef.current.muted = false;
-  videoRef.current.volume = 1;
-
-  try {
-    await videoRef.current.play();
-    setSoundOn(true);
-  } catch (error) {
-    console.error(error);
-  }
-};
   return (
     <section
       id="como-funciona"
@@ -36,39 +19,12 @@ const enableSound = async () => {
 
           <div className="relative aspect-video overflow-hidden">
 
-<video
-  ref={videoRef}
-  className="h-full w-full object-cover pointer-events-none"
-  autoPlay
-  muted
-  loop
-  playsInline
->
-  <source
-    src="/videos/testimonio.mp4"
-    type="video/mp4"
-  />
-</video>
-
-{!soundOn && (
-  <button
-    onClick={enableSound}
-    className="absolute inset-0 flex items-center justify-center bg-black/20 transition hover:bg-black/30"
-  >
-    <div className="flex items-center gap-3 rounded-full bg-white/95 px-6 py-3 shadow-xl backdrop-blur-md">
-
-      <Volume2
-        className="text-[#25D366]"
-        size={22}
-      />
-
-      <span className="font-semibold text-slate-900">
-        Escuchar testimonio
-      </span>
-
-    </div>
-  </button>
-)}
+<Image
+  src="/images/testimonials/testimonio-medico.png"
+  alt="Testimonio médico AinovaHealth"
+  fill
+  className="object-cover"
+/>
 
 </div>
 

@@ -1,3 +1,5 @@
+import { FaWhatsapp } from "react-icons/fa";
+
 export function Footer() {
     return (
         <footer
@@ -34,7 +36,10 @@ export function Footer() {
 
   {/* BOTÓN */}
 
-<button
+<a
+  href="https://wa.me/573118901570?text=Hola,%20quiero%20agendar%20una%20cita"
+  target="_blank"
+  rel="noopener noreferrer"
   className="
     mt-10
     relative
@@ -76,7 +81,7 @@ export function Footer() {
 >
 
   <div className="flex h-10 w-10 lg:h-14 lg:w-14 items-center justify-center rounded-full bg-white/10">
-    <span className="text-[24px] lg:text-[32px]">💬</span>
+    <FaWhatsapp className="text-[24px] lg:text-[31px] text-white" />
   </div>
 
   <div className="text-left">
@@ -91,7 +96,7 @@ export function Footer() {
 
   </div>
 
-</button>
+</a>
 
 </div>
 
