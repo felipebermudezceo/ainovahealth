@@ -148,7 +148,7 @@ export function Navbar() {
   <div className="absolute -bottom-3 left-1/2 h-8 w-[85%] -translate-x-1/2 rounded-full bg-[#25D366]/60 blur-xl"></div>
 
   <a
-  href="https://wa.me/573118901570?text=Hola,%20quiero%20agendar%20una%20cita"
+  href="https://wa.me/573007239175?text=Hola,%20quiero%20agendar%20una%20cita"
   target="_blank"
   rel="noopener noreferrer"
   className="relative flex h-[58px] items-center gap-3 rounded-full bg-gradient-to-r from-[#25D366] to-[#17B857] px-8 text-[15px] font-bold text-white shadow-[0_18px_40px_rgba(37,211,102,.45)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_22px_55px_rgba(37,211,102,.55)]"
