@@ -5,7 +5,7 @@ import { FaWhatsapp } from "react-icons/fa";
 export function FloatingWhatsapp() {
   return (
     <a
-      href="https://wa.me/573007239175"
+      href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20Quisiera%20Agendar%20Una%20Cita%2C%20Mi%20nombre%20es..."
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-[999]"

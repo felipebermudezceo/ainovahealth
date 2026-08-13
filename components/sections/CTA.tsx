@@ -27,7 +27,7 @@ export function CTA() {
             {/* Botón */}
 
             <a
-  href="https://wa.me/573007239175?text=Hola,%20quiero%20agendar%20una%20cita."
+  href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20Quisiera%20Agendar%20Una%20Cita%2C%20Mi%20nombre%20es..."
   target="_blank"
   rel="noopener noreferrer"
   className="

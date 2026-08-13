@@ -72,14 +72,10 @@ export function Conditions() {
           {items.map((item, index) => {
             const Icon = item.icon;
 
-            const message = encodeURIComponent(
-              `Hola, me interesa el servicio de ${item.title}. Quisiera recibir más información.`
-            );
-
             return (
               <a
                 key={item.title}
-                href={`https://wa.me/573007239175?text=${message}`}
+                href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20Quisiera%20Agendar%20Una%20Cita%2C%20Mi%20nombre%20es..."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group"
