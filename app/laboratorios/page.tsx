@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { LaboratoryHero } from "@/components/laboratory/LaboratoryHero";
 import { LaboratoryBenefits } from "@/components/laboratory/LaboratoryBenefits";
+import { HowToBook } from "@/components/shared/HowToBook";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FooterInfo } from "@/components/sections/FooterInfo";
 import { Footer } from "@/components/sections/Footer";
@@ -13,6 +14,8 @@ export default function LaboratoriosPage() {
       <LaboratoryHero />
 
       <LaboratoryBenefits />
+
+      <HowToBook />
 
       <Testimonials />
 

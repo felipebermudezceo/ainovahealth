@@ -8,6 +8,9 @@ import { useState } from "react";
 
 const SERVICE_ROUTES = [
   "/laboratorios",
+  "/lavado-oidos",
+  "/pediatria",
+  "/electrocardiograma",
   "/enfermeria",
   "/vacunacion",
   "/telemedicina",
@@ -16,7 +19,7 @@ const SERVICE_ROUTES = [
 const menu = [
   {
     name: "Inicio",
-    href: "#inicio",
+    href: "/",
   },
   {
     name: "Servicios",
@@ -29,6 +32,18 @@ const menu = [
       {
         name: "Laboratorios Clínicos",
         href: "/laboratorios",
+      },
+      {
+        name: "Lavado de Oídos",
+        href: "/lavado-oidos",
+      },
+      {
+        name: "Pediatría",
+        href: "/pediatria",
+      },
+      {
+        name: "Electrocardiograma",
+        href: "/electrocardiograma",
       },
     ],
   },
