@@ -225,6 +225,7 @@ font-black font-black text-slate-900">
 
       <motion.div
         className="
+        max-lg:hidden
         fixed
         bottom-5
         left-4
