@@ -1,0 +1,332 @@
+// AinovaHealth · portal médico
+// Persistencia relacional. No hay auth, correo ni PDF en disco en esta fase.
+//
+// Patient = ficha maestra viva (prefill de la próxima visita).
+// Encounter = una atención. finished es conceptualmente inmutable
+// (el bloqueo de edición se implementa después en la aplicación).
+// EncounterClinical = clínica de ESA atención.
+// EncounterProcedure = extensión C de ESA atención (esquema clínico pendiente).
+// EncounterIdentitySnapshot = identidad congelada al finalizar, para el PDF.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum EncounterStatus {
+  draft
+  in_review
+  finished
+}
+
+enum AttentionType {
+  home_visit
+  ear_wash
+  suture
+}
+
+/// Solo procedimientos. home_visit no es un procedimiento.
+enum ProcedureType {
+  ear_wash
+  suture
+}
+
+enum MedsStatus {
+  yes
+  no
+  unknown
+}
+
+enum OperationalStatus {
+  active
+  follow_up
+  closed
+}
+
+enum AntecedentType {
+  personal
+  surgical
+  hospital
+  family
+  pharmacological
+  toxicological
+  gyneco
+  immunization
+}
+
+model Practitioner {
+  id           String   @id @default(uuid())
+  fullName     String
+  specialty    String
+  email        String   @unique
+  phone        String?
+  license      String
+  city         String?
+  isActive     Boolean  @default(true)
+  passwordHash String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  attendingEncounters Encounter[] @relation("EncounterAttending")
+  finalizedEncounters Encounter[] @relation("EncounterFinalizedBy")
+
+  @@map("practitioners")
+}
+
+model Patient {
+  id                 String             @id @default(uuid())
+  displayCode        String             @unique
+  fullName           String
+  /// Catálogo (CC, CE, TI, pasaporte) pendiente de validación clínica/legal.
+  documentType       String
+  documentNumber     String
+  birthDate          DateTime           @db.Date
+  /// Valores permitidos pendientes de validación.
+  sex                String
+  phone              String?
+  email              String?
+  address            String?
+  city               String?
+  operationalStatus  OperationalStatus  @default(active)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  emergencyContacts  EmergencyContact[]
+  antecedents        PatientAntecedent[]
+  allergies          PatientAllergy[]
+  encounters         Encounter[]
+
+  @@unique([documentType, documentNumber])
+  @@index([fullName])
+  @@map("patients")
+}
+
+model EmergencyContact {
+  id        String   @id @default(uuid())
+  patientId String
+  patient   Patient  @relation(fields: [patientId], references: [id], onDelete: Restrict)
+  name      String
+  relation  String
+  phone     String
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([patientId])
+  @@map("emergency_contacts")
+}
+
+model PatientAntecedent {
+  id        String          @id @default(uuid())
+  patientId String
+  patient   Patient         @relation(fields: [patientId], references: [id], onDelete: Restrict)
+  type      AntecedentType
+  content   String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  @@index([patientId, type])
+  @@map("patient_antecedents")
+}
+
+model PatientAllergy {
+  id          String   @id @default(uuid())
+  patientId   String
+  patient     Patient  @relation(fields: [patientId], references: [id], onDelete: Restrict)
+  description String
+  notes       String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([patientId])
+  @@map("patient_allergies")
+}
+
+/// Una atención concreta. No reutilizar esta fila para una visita posterior.
+model Encounter {
+  id             String           @id @default(uuid())
+  patientId      String
+  patient        Patient          @relation(fields: [patientId], references: [id], onDelete: Restrict)
+
+  practitionerId String
+  practitioner   Practitioner     @relation("EncounterAttending", fields: [practitionerId], references: [id], onDelete: Restrict)
+
+  attendedOn     DateTime         @db.Date
+  attendedAtTime DateTime         @db.Time
+  attentionType  AttentionType
+  /// Catálogo (domicilio, consultorio, teleorientación) pendiente de validar.
+  modality       String?
+  attentionAddress String?
+
+  status             EncounterStatus @default(draft)
+  currentMedsStatus  MedsStatus?
+
+  finalizedAt    DateTime?
+  finalizedById  String?
+  finalizedBy    Practitioner?    @relation("EncounterFinalizedBy", fields: [finalizedById], references: [id], onDelete: Restrict)
+  closingNotes   String?
+
+  /// Copias al cierre para reconstruir el PDF si el Practitioner vivo cambia.
+  practitionerNameSnapshot      String?
+  practitionerSpecialtySnapshot String?
+  practitionerLicenseSnapshot   String?
+  practitionerEmailSnapshot     String?
+
+  /// Optimistic lock del borrador. finished no se actualiza (regla de aplicación).
+  version   Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clinical           EncounterClinical?
+  procedure          EncounterProcedure?
+  identitySnapshot   EncounterIdentitySnapshot?
+  chartSnapshot      EncounterChartSnapshot?
+  reportedMedications EncounterReportedMedication[]
+  prescription       EncounterPrescription?
+
+  @@index([patientId, attendedOn])
+  @@index([practitionerId])
+  @@index([status])
+  @@index([finalizedById])
+  @@map("encounters")
+}
+
+model EncounterClinical {
+  id          String    @id @default(uuid())
+  encounterId String    @unique
+  encounter   Encounter @relation(fields: [encounterId], references: [id], onDelete: Restrict)
+
+  reason              String?
+  illnessOnset        String?
+  illnessEvolution    String?
+  associatedSymptoms  String?
+  previousTreatments  String?
+  illnessNotes        String?
+
+  /// Unidades y rangos pendientes de validación clínica.
+  bp          String?
+  hr          String?
+  rr          String?
+  temperature String?
+  spo2        String?
+  weight      String?
+  height      String?
+  vitalsOther String?
+
+  physicalExam String?
+
+  findings         String?
+  diagnosis        String?
+  differentials    String?
+  evaluationNotes  String?
+
+  treatment        String?
+  proceduresDone   String?
+  recommendations  String?
+  alarmSigns       String?
+  followUp         String?
+  referral         String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("encounter_clinical")
+}
+
+model EncounterReportedMedication {
+  id          String    @id @default(uuid())
+  encounterId String
+  encounter   Encounter @relation(fields: [encounterId], references: [id], onDelete: Restrict)
+  name        String
+  dose        String?
+  frequency   String?
+  /// Catálogo de vía pendiente de validación.
+  route       String?
+  indication  String?
+  notes       String?
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([encounterId])
+  @@map("encounter_reported_medications")
+}
+
+model EncounterPrescription {
+  id             String    @id @default(uuid())
+  encounterId    String    @unique
+  encounter      Encounter @relation(fields: [encounterId], references: [id], onDelete: Restrict)
+  /// v1: texto del formulario. Filas estructuradas quedan para una fase posterior.
+  prescribedText String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@map("encounter_prescriptions")
+}
+
+/// Extensión C. Campos específicos de lavado/sutura pendientes de validación clínica.
+model EncounterProcedure {
+  id                    String        @id @default(uuid())
+  encounterId           String        @unique
+  encounter             Encounter     @relation(fields: [encounterId], references: [id], onDelete: Restrict)
+  kind                  ProcedureType
+  notes                 String?
+  clinicalSchemaPending Boolean       @default(true)
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  @@map("encounter_procedures")
+}
+
+/// Identidad congelada al pasar a finished. Fuente del bloque de paciente en el PDF.
+model EncounterIdentitySnapshot {
+  id               String    @id @default(uuid())
+  encounterId      String    @unique
+  encounter        Encounter @relation(fields: [encounterId], references: [id], onDelete: Restrict)
+
+  patientDisplayCode String
+  fullName           String
+  documentType       String
+  documentNumber     String
+  birthDate          DateTime @db.Date
+  /// Edad en años a la fecha del encuentro. No se usa la ficha viva para el PDF.
+  ageAtEncounter     Int
+  sex                String
+  phone              String?
+  email              String?
+  address            String?
+  city               String?
+  emergencyName      String?
+  emergencyRelation  String?
+  emergencyPhone     String?
+
+  createdAt DateTime @default(now())
+
+  @@map("encounter_identity_snapshots")
+}
+
+/// Antecedentes y alergias documentados ESE día. El PDF no lee PatientAntecedent vivo.
+model EncounterChartSnapshot {
+  id          String    @id @default(uuid())
+  encounterId String    @unique
+  encounter   Encounter @relation(fields: [encounterId], references: [id], onDelete: Restrict)
+
+  antPersonal          String?
+  antSurgical          String?
+  antHospital          String?
+  antFamily            String?
+  antPharmacological   String?
+  antToxicological     String?
+  antGyneco            String?
+  antImmunization      String?
+  allergies            String?
+  currentMedsStatus    MedsStatus?
+
+  createdAt DateTime @default(now())
+
+  @@map("encounter_chart_snapshots")
+}
