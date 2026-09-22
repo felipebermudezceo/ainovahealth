@@ -1,6 +1,9 @@
 import "server-only";
 import { PrismaClient } from "@prisma/client";
+import type { ITXClientDenyList } from "@prisma/client/runtime/client";
 import { PrismaPg } from "@prisma/adapter-pg";
+
+export type PrismaTransactionClient = Omit<PrismaClient, ITXClientDenyList>;
 
 const globalForPrisma = globalThis as unknown as {
   prisma?: PrismaClient;

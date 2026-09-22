@@ -2,7 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { isPrismaUniqueConflict, prisma } from "@/lib/db/prisma";
+import {
+  isPrismaUniqueConflict,
+  prisma,
+  type PrismaTransactionClient,
+} from "@/lib/db/prisma";
 import {
   ageYearsAt,
   dateFromYmd,
@@ -88,7 +92,7 @@ export async function saveDraftEncounter(input: {
   if ("error" in parsed) return parsed;
 
   try {
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx: PrismaTransactionClient) => {
       const current = await tx.encounter.findUnique({
         where: { id: parsed.encounterId },
         select: {
@@ -413,7 +417,7 @@ export async function finalizeEncounter(input: {
   const practitioner = await requireActivePractitioner();
 
   try {
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: PrismaTransactionClient) => {
       const current = await tx.encounter.findUnique({
         where: { id: input.encounterId },
         include: {
