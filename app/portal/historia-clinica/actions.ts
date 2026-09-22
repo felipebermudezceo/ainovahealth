@@ -23,9 +23,19 @@ import {
   parseDraftForm,
   validateFinalizeFromRecord,
 } from "@/lib/encounters/validation";
+import {
+  isDemoMode,
+  isVisibleInCurrentMode,
+  scopeMismatchMessage,
+} from "@/lib/auth/demo";
+import { ensureDemoPractitioner } from "@/lib/auth/demo-practitioner";
 import { requirePractitioner } from "@/lib/auth/session";
 
 async function requireActivePractitioner() {
+  if (isDemoMode()) {
+    return ensureDemoPractitioner();
+  }
+
   const sessionPractitioner = await requirePractitioner();
   const practitioner = await prisma.practitioner.findUnique({
     where: { id: sessionPractitioner.id },
@@ -54,10 +64,10 @@ export async function createDraftEncounter(patientId: string) {
   const practitioner = await requireActivePractitioner();
   const patient = await prisma.patient.findUnique({
     where: { id: patientId },
-    select: { id: true },
+    select: { id: true, displayCode: true },
   });
-  if (!patient) {
-    throw new Error("Paciente no encontrado");
+  if (!patient || !isVisibleInCurrentMode(patient.displayCode)) {
+    throw new Error(scopeMismatchMessage());
   }
   const attendingId = practitioner.id;
   const now = nowInBogota();
@@ -101,11 +111,15 @@ export async function saveDraftEncounter(input: {
           practitionerId: true,
           status: true,
           version: true,
+          patient: { select: { displayCode: true } },
         },
       });
 
       if (!current) {
         throw new Error("NOT_FOUND");
+      }
+      if (!isVisibleInCurrentMode(current.patient.displayCode)) {
+        throw new Error("SCOPE");
       }
       if (current.patientId !== parsed.patientId) {
         throw new Error("PATIENT_MISMATCH");
@@ -292,6 +306,9 @@ export async function saveDraftEncounter(input: {
       if (error.message === "NOT_FOUND") {
         return { error: "No se encontró esta atención." };
       }
+      if (error.message === "SCOPE") {
+        return { error: scopeMismatchMessage() };
+      }
       if (error.message === "PATIENT_MISMATCH") {
         return { error: "Esta atención no pertenece al paciente indicado." };
       }
@@ -344,11 +361,12 @@ export async function markEncounterInReview(input: {
       practitionerId: true,
       status: true,
       version: true,
+      patient: { select: { displayCode: true } },
     },
   });
 
-  if (!current) {
-    return { error: "No se encontró esta atención." };
+  if (!current || !isVisibleInCurrentMode(current.patient.displayCode)) {
+    return { error: scopeMismatchMessage() };
   }
   if (current.practitionerId !== practitioner.id) {
     return {
@@ -437,6 +455,9 @@ export async function finalizeEncounter(input: {
 
       if (!current) {
         throw new Error("NOT_FOUND");
+      }
+      if (!isVisibleInCurrentMode(current.patient.displayCode)) {
+        throw new Error("SCOPE");
       }
       const reportedMedications: { name: string }[] = current.reportedMedications;
       const patientAntecedents: {
@@ -597,6 +618,9 @@ export async function finalizeEncounter(input: {
     if (error instanceof Error) {
       if (error.message === "NOT_FOUND") {
         return { error: "No se encontró esta atención." };
+      }
+      if (error.message === "SCOPE") {
+        return { error: scopeMismatchMessage() };
       }
       if (error.message === "NOT_ATTENDING") {
         return {

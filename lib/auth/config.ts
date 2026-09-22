@@ -1,4 +1,5 @@
 import type { NextAuthConfig } from "next-auth";
+import { isDemoMode } from "@/lib/auth/demo";
 
 function readJwtString(value: unknown) {
   return typeof value === "string" && value.length > 0 ? value : null;
@@ -15,6 +16,7 @@ export const authConfig = {
   providers: [],
   callbacks: {
     authorized({ auth, request }) {
+      if (isDemoMode()) return true;
       const { pathname } = request.nextUrl;
       if (!pathname.startsWith("/portal")) return true;
       if (pathname === "/portal/login") return true;

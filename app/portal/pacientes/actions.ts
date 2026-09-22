@@ -1,8 +1,16 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import {
+  isDemoMode,
+  isVisibleInCurrentMode,
+  scopeMismatchMessage,
+} from "@/lib/auth/demo";
 import { isPrismaUniqueConflict, prisma } from "@/lib/db/prisma";
-import { nextPatientDisplayCode } from "@/lib/patients/codes";
+import {
+  nextDemoPatientDisplayCode,
+  nextPatientDisplayCode,
+} from "@/lib/patients/codes";
 import {
   parsePatientForm,
   type PatientFormState,
@@ -49,7 +57,9 @@ export async function createPatient(
   try {
     const patient = await prisma.patient.create({
       data: {
-        displayCode: await nextPatientDisplayCode(),
+        displayCode: isDemoMode()
+          ? await nextDemoPatientDisplayCode()
+          : await nextPatientDisplayCode(),
         ...persistFields(input),
       },
       select: { id: true },
@@ -73,6 +83,14 @@ export async function updatePatient(
 
   const input = parsed as PatientInput;
   try {
+    const current = await prisma.patient.findUnique({
+      where: { id },
+      select: { displayCode: true },
+    });
+    if (!current || !isVisibleInCurrentMode(current.displayCode)) {
+      return { error: scopeMismatchMessage() };
+    }
+
     await prisma.patient.update({
       where: { id },
       data: persistFields(input),

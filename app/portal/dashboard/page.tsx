@@ -1,8 +1,16 @@
 import { mockRecentVisits, mockStats } from "@/components/portal/mock-data";
+import { isDemoMode } from "@/lib/auth/demo";
 
 export default function PortalDashboardPage() {
+  const demo = isDemoMode();
+
   return (
     <div className="mx-auto max-w-6xl">
+      {demo ? (
+        <p className="mb-4 rounded-2xl bg-[#ECFDF5] px-4 py-3 text-sm font-medium text-[#0A3D49]">
+          Modo demo temporal. Usuario de prueba. Solo fichas DEMO-, sin historias reales.
+        </p>
+      ) : null}
       <h1 className="text-[30px] font-black tracking-tight text-[#0A3D49] lg:text-[36px]">
         Dashboard
       </h1>
