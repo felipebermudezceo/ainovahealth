@@ -20,7 +20,7 @@ export default async function PortalPerfilPage() {
   const profile = practitioner ?? sessionPractitioner;
   const initials = profile.fullName
     .split(" ")
-    .filter(Boolean)
+    .filter((part) => part.length > 0)
     .slice(0, 2)
     .map((part) => part[0]?.toUpperCase() ?? "")
     .join("");
