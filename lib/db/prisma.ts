@@ -19,7 +19,34 @@ function createPrismaClient() {
   return new PrismaClient({ adapter });
 }
 
-export const prisma = globalForPrisma.prisma ?? createPrismaClient();
+let prismaClient: PrismaClient | undefined;
+
+function getPrismaClient() {
+  if (prismaClient) {
+    return prismaClient;
+  }
+  if (globalForPrisma.prisma) {
+    prismaClient = globalForPrisma.prisma;
+    return prismaClient;
+  }
+
+  prismaClient = createPrismaClient();
+  if (process.env.NODE_ENV !== "production") {
+    globalForPrisma.prisma = prismaClient;
+  }
+  return prismaClient;
+}
+
+export const prisma: PrismaClient = new Proxy({} as PrismaClient, {
+  get(_target, property, _receiver) {
+    const client = getPrismaClient();
+    const value = Reflect.get(client, property, client);
+    if (typeof value === "function") {
+      return value.bind(client);
+    }
+    return value;
+  },
+});
 
 export function isPrismaUniqueConflict(error: unknown) {
   return (
@@ -28,8 +55,4 @@ export function isPrismaUniqueConflict(error: unknown) {
     "code" in error &&
     (error as { code?: unknown }).code === "P2002"
   );
-}
-
-if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = prisma;
 }
