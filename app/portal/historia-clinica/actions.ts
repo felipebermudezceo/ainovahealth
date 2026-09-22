@@ -1,10 +1,5 @@
 "use server";
 
-import type {
-  EncounterReportedMedication,
-  PatientAllergy,
-  PatientAntecedent,
-} from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import {
@@ -443,11 +438,21 @@ export async function finalizeEncounter(input: {
       if (!current) {
         throw new Error("NOT_FOUND");
       }
-      const reportedMedications: EncounterReportedMedication[] =
-        current.reportedMedications;
-      const patientAntecedents: PatientAntecedent[] =
-        current.patient.antecedents;
-      const patientAllergies: PatientAllergy[] = current.patient.allergies;
+      const reportedMedications: { name: string }[] = current.reportedMedications;
+      const patientAntecedents: {
+        type:
+          | "personal"
+          | "surgical"
+          | "hospital"
+          | "family"
+          | "pharmacological"
+          | "toxicological"
+          | "gyneco"
+          | "immunization";
+        content: string;
+      }[] = current.patient.antecedents;
+      const patientAllergies: { description: string }[] =
+        current.patient.allergies;
       if (current.practitionerId !== practitioner.id) {
         throw new Error("NOT_ATTENDING");
       }
