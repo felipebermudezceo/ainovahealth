@@ -3,6 +3,24 @@ import { requirePractitioner } from "@/lib/auth/session";
 
 export const dynamic = "force-dynamic";
 
+type ProfileView = {
+  fullName: string;
+  specialty: string;
+  email: string;
+  license: string;
+  phone: string | null;
+  city: string | null;
+};
+
+function initialsFromName(fullName: string) {
+  return fullName
+    .split(" ")
+    .filter((part: string) => part.length > 0)
+    .slice(0, 2)
+    .map((part: string) => part[0]?.toUpperCase() ?? "")
+    .join("");
+}
+
 export default async function PortalPerfilPage() {
   const sessionPractitioner = await requirePractitioner();
   const practitioner = await prisma.practitioner.findUnique({
@@ -17,13 +35,24 @@ export default async function PortalPerfilPage() {
     },
   });
 
-  const profile = practitioner ?? sessionPractitioner;
-  const initials = profile.fullName
-    .split(" ")
-    .filter((part) => part.length > 0)
-    .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase() ?? "")
-    .join("");
+  const profile: ProfileView = practitioner
+    ? {
+        fullName: practitioner.fullName,
+        specialty: practitioner.specialty,
+        email: practitioner.email,
+        license: practitioner.license,
+        phone: practitioner.phone,
+        city: practitioner.city,
+      }
+    : {
+        fullName: sessionPractitioner.fullName,
+        specialty: sessionPractitioner.specialty,
+        email: sessionPractitioner.email,
+        license: sessionPractitioner.license,
+        phone: null,
+        city: null,
+      };
+  const initials = initialsFromName(profile.fullName);
 
   const fields = [
     { label: "Nombre", value: profile.fullName },
@@ -31,10 +60,10 @@ export default async function PortalPerfilPage() {
     { label: "Correo", value: profile.email },
     {
       label: "Teléfono",
-      value: "phone" in profile ? profile.phone || "—" : "—",
+      value: profile.phone || "—",
     },
     { label: "Registro médico", value: profile.license },
-    { label: "Ciudad", value: "city" in profile ? profile.city || "—" : "—" },
+    { label: "Ciudad", value: profile.city || "—" },
   ];
 
   return (
