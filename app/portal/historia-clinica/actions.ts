@@ -1,5 +1,10 @@
 "use server";
 
+import type {
+  EncounterReportedMedication,
+  PatientAllergy,
+  PatientAntecedent,
+} from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import {
@@ -438,6 +443,11 @@ export async function finalizeEncounter(input: {
       if (!current) {
         throw new Error("NOT_FOUND");
       }
+      const reportedMedications: EncounterReportedMedication[] =
+        current.reportedMedications;
+      const patientAntecedents: PatientAntecedent[] =
+        current.patient.antecedents;
+      const patientAllergies: PatientAllergy[] = current.patient.allergies;
       if (current.practitionerId !== practitioner.id) {
         throw new Error("NOT_ATTENDING");
       }
@@ -471,7 +481,7 @@ export async function finalizeEncounter(input: {
         attendedAtTime: current.attendedAtTime,
         attentionType: current.attentionType,
         currentMedsStatus: current.currentMedsStatus,
-        reportedMedicationNames: current.reportedMedications.map((item) => item.name),
+        reportedMedicationNames: reportedMedications.map((item) => item.name),
         clinical: current.clinical,
       });
       if (!validation.ok) {
@@ -524,7 +534,7 @@ export async function finalizeEncounter(input: {
           gyneco: "antGyneco",
           immunization: "antImmunization",
         } as const;
-        for (const row of current.patient.antecedents) {
+        for (const row of patientAntecedents) {
           const key = fieldByType[row.type];
           if (!key) continue;
           antecedents[key] = antecedents[key]
@@ -535,7 +545,7 @@ export async function finalizeEncounter(input: {
           data: {
             encounterId: current.id,
             ...antecedents,
-            allergies: current.patient.allergies
+            allergies: patientAllergies
               .map((item) => item.description)
               .join("\n") || null,
             currentMedsStatus: current.currentMedsStatus,
