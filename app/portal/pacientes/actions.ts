@@ -1,8 +1,7 @@
 "use server";
 
-import { Prisma } from "@prisma/client";
 import { redirect } from "next/navigation";
-import { prisma } from "@/lib/db/prisma";
+import { isPrismaUniqueConflict, prisma } from "@/lib/db/prisma";
 import { nextPatientDisplayCode } from "@/lib/patients/codes";
 import {
   parsePatientForm,
@@ -30,7 +29,7 @@ function persistFields(input: PatientInput) {
 }
 
 function duplicateError(error: unknown): PatientFormState | null {
-  if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+  if (isPrismaUniqueConflict(error)) {
     return {
       error: "Ya existe un paciente con ese tipo y número de documento.",
     };

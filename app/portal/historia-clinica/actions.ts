@@ -1,9 +1,8 @@
 "use server";
 
-import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { prisma } from "@/lib/db/prisma";
+import { isPrismaUniqueConflict, prisma } from "@/lib/db/prisma";
 import {
   ageYearsAt,
   dateFromYmd,
@@ -308,7 +307,7 @@ export async function saveDraftEncounter(input: {
         };
       }
     }
-    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+    if (isPrismaUniqueConflict(error)) {
       return {
         error: "Ya existe un paciente con ese tipo y número de documento.",
       };

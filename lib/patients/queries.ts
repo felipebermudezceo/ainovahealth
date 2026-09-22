@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/db/prisma";
 import type { OperationalStatusValue } from "./constants";
 import { formatBirthDate, formatUpdatedAt } from "./validation";
@@ -53,12 +52,12 @@ function toListItem(patient: {
 
 export async function listPatients(query?: string): Promise<PatientListItem[]> {
   const q = query?.trim();
-  const where: Prisma.PatientWhereInput = q
+  const where = q
     ? {
         OR: [
-          { fullName: { contains: q, mode: "insensitive" } },
-          { documentNumber: { contains: q, mode: "insensitive" } },
-          { displayCode: { contains: q, mode: "insensitive" } },
+          { fullName: { contains: q, mode: "insensitive" as const } },
+          { documentNumber: { contains: q, mode: "insensitive" as const } },
+          { displayCode: { contains: q, mode: "insensitive" as const } },
         ],
       }
     : {};
