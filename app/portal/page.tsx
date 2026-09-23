@@ -44,7 +44,7 @@ export default async function PortalHomePage() {
     <div className="mx-auto max-w-6xl">
       {demo ? (
         <p className="mb-4 rounded-2xl bg-[#ECFDF5] px-4 py-3 text-sm font-medium text-[#0A3D49]">
-          Modo demo temporal. Usuario de prueba. Solo fichas DEMO-, sin historias reales.
+          Modo demo. Datos ficticios. Sin conexión a historias reales ni a la base de datos.
         </p>
       ) : null}
       <h1 className="text-[28px] font-black tracking-tight text-[#0A3D49] lg:text-[40px]">

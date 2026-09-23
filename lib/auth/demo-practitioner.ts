@@ -1,51 +1,31 @@
 import type { SessionPractitioner } from "@/types/next-auth";
 import { DEMO_PRACTITIONER_EMAIL, isDemoMode } from "@/lib/auth/demo";
-import { prisma } from "@/lib/db/prisma";
 
-const DEMO_PROFILE = {
+export const DEMO_PRACTITIONER: SessionPractitioner = {
+  id: "demo-practitioner",
   fullName: "Dra. Camila Restrepo",
+  email: DEMO_PRACTITIONER_EMAIL,
   specialty: "Medicina General",
   license: "RM-DEMO",
-  city: "Demo",
+  isActive: true,
+};
+
+export const DEMO_PRACTITIONER_PROFILE = {
+  fullName: DEMO_PRACTITIONER.fullName,
+  specialty: DEMO_PRACTITIONER.specialty,
+  email: DEMO_PRACTITIONER.email,
+  license: DEMO_PRACTITIONER.license,
+  phone: "+57 300 000 0000",
+  city: "Bogotá",
 } as const;
 
-let demoPractitioner: SessionPractitioner | undefined;
-
-export async function ensureDemoPractitioner(): Promise<SessionPractitioner> {
+export function getDemoPractitioner(): SessionPractitioner {
   if (!isDemoMode()) {
     throw new Error("El usuario demo solo existe cuando DEMO_MODE=true.");
   }
-  if (demoPractitioner) {
-    return demoPractitioner;
-  }
+  return DEMO_PRACTITIONER;
+}
 
-  const row = await prisma.practitioner.upsert({
-    where: { email: DEMO_PRACTITIONER_EMAIL },
-    update: {
-      fullName: DEMO_PROFILE.fullName,
-      specialty: DEMO_PROFILE.specialty,
-      license: DEMO_PROFILE.license,
-      city: DEMO_PROFILE.city,
-      isActive: true,
-    },
-    create: {
-      fullName: DEMO_PROFILE.fullName,
-      email: DEMO_PRACTITIONER_EMAIL,
-      specialty: DEMO_PROFILE.specialty,
-      license: DEMO_PROFILE.license,
-      city: DEMO_PROFILE.city,
-      isActive: true,
-    },
-    select: {
-      id: true,
-      fullName: true,
-      email: true,
-      specialty: true,
-      license: true,
-      isActive: true,
-    },
-  });
-
-  demoPractitioner = row;
-  return row;
+export async function ensureDemoPractitioner(): Promise<SessionPractitioner> {
+  return getDemoPractitioner();
 }

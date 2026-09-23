@@ -1,5 +1,10 @@
 import type { AntecedentType } from "@prisma/client";
-import { isVisibleInCurrentMode, patientScopeWhere } from "@/lib/auth/demo";
+import { isDemoMode, isVisibleInCurrentMode, patientScopeWhere } from "@/lib/auth/demo";
+import {
+  getDemoEncounterEditor,
+  listDemoPatientEncounters,
+  listDemoRecentEncounters,
+} from "@/lib/demo/portal-data";
 import { requirePractitioner } from "@/lib/auth/session";
 import { prisma } from "@/lib/db/prisma";
 import { formatUpdatedAt } from "@/lib/patients/validation";
@@ -60,6 +65,9 @@ export async function listPatientEncounters(
   patientId: string,
 ): Promise<EncounterListItem[]> {
   await requirePractitioner();
+  if (isDemoMode()) {
+    return listDemoPatientEncounters(patientId);
+  }
   const encounters = await prisma.encounter.findMany({
     where: { patientId, patient: patientScopeWhere() },
     orderBy: [{ attendedOn: "desc" }, { updatedAt: "desc" }],
@@ -89,6 +97,9 @@ export async function listRecentEncounters(
   take = 40,
 ): Promise<(EncounterListItem & { patientName: string; displayCode: string; patientId: string })[]> {
   await requirePractitioner();
+  if (isDemoMode()) {
+    return listDemoRecentEncounters().slice(0, take);
+  }
   const encounters = await prisma.encounter.findMany({
     where: { patient: patientScopeWhere() },
     orderBy: { updatedAt: "desc" },
@@ -124,6 +135,9 @@ export async function getEncounterEditor(
   encounterId: string,
 ): Promise<EncounterEditorData | null> {
   await requirePractitioner();
+  if (isDemoMode()) {
+    return getDemoEncounterEditor(encounterId);
+  }
   const encounter = await prisma.encounter.findUnique({
     where: { id: encounterId },
     include: {

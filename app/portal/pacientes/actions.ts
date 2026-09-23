@@ -7,11 +7,9 @@ import {
   scopeMismatchMessage,
 } from "@/lib/auth/demo";
 import { requirePractitioner } from "@/lib/auth/session";
+import { DEMO_WRITE_MESSAGE } from "@/lib/demo/portal-data";
 import { isPrismaUniqueConflict, prisma } from "@/lib/db/prisma";
-import {
-  nextDemoPatientDisplayCode,
-  nextPatientDisplayCode,
-} from "@/lib/patients/codes";
+import { nextPatientDisplayCode } from "@/lib/patients/codes";
 import {
   parsePatientForm,
   type PatientFormState,
@@ -51,6 +49,9 @@ export async function createPatient(
   formData: FormData,
 ): Promise<PatientFormState> {
   await requirePractitioner();
+  if (isDemoMode()) {
+    return { error: DEMO_WRITE_MESSAGE };
+  }
   const parsed = parsePatientForm(formData);
   if ("error" in parsed && parsed.error) return parsed;
 
@@ -59,9 +60,7 @@ export async function createPatient(
   try {
     const patient = await prisma.patient.create({
       data: {
-        displayCode: isDemoMode()
-          ? await nextDemoPatientDisplayCode()
-          : await nextPatientDisplayCode(),
+        displayCode: await nextPatientDisplayCode(),
         ...persistFields(input),
       },
       select: { id: true },
@@ -81,6 +80,9 @@ export async function updatePatient(
   formData: FormData,
 ): Promise<PatientFormState> {
   await requirePractitioner();
+  if (isDemoMode()) {
+    return { error: DEMO_WRITE_MESSAGE };
+  }
   const parsed = parsePatientForm(formData);
   if ("error" in parsed && parsed.error) return parsed;
 

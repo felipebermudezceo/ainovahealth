@@ -6,7 +6,7 @@ import { useActionState, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { loginAction } from "./actions";
 
-export function LoginForm() {
+export function LoginForm({ demoEnabled = false }: { demoEnabled?: boolean }) {
   const [state, formAction, pending] = useActionState(loginAction, {});
   const [showPassword, setShowPassword] = useState(false);
 
@@ -89,6 +89,23 @@ export function LoginForm() {
             {pending ? "Ingresando…" : "Iniciar sesión"}
           </button>
         </form>
+
+        {demoEnabled ? (
+          <div className="mt-6">
+            <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+              Presentación
+            </p>
+            <Link
+              href="/portal"
+              className="flex w-full items-center justify-center rounded-full border-2 border-[#0A3D49] px-5 py-3.5 text-[15px] font-bold text-[#0A3D49] transition hover:bg-[#0A3D49] hover:text-white"
+            >
+              Entrar a demo
+            </Link>
+            <p className="mt-3 text-center text-xs leading-5 text-slate-400">
+              Datos ficticios. No consulta la base de datos ni historias reales.
+            </p>
+          </div>
+        ) : null}
 
         <p className="mt-6 text-center text-sm text-slate-500">
           ¿Aún no tienes cuenta?{" "}

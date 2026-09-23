@@ -1,5 +1,7 @@
-import { prisma } from "@/lib/db/prisma";
+import { isDemoMode } from "@/lib/auth/demo";
+import { DEMO_PRACTITIONER_PROFILE } from "@/lib/auth/demo-practitioner";
 import { requirePractitioner } from "@/lib/auth/session";
+import { prisma } from "@/lib/db/prisma";
 
 export const dynamic = "force-dynamic";
 
@@ -23,37 +25,43 @@ function initialsFromName(fullName: string) {
 
 export default async function PortalPerfilPage() {
   const sessionPractitioner = await requirePractitioner();
-  const practitioner = await prisma.practitioner.findUnique({
-    where: { id: sessionPractitioner.id },
-    select: {
-      fullName: true,
-      specialty: true,
-      email: true,
-      phone: true,
-      license: true,
-      city: true,
-    },
-  });
+  let profile: ProfileView;
 
-  const profile: ProfileView = practitioner
-    ? {
-        fullName: practitioner.fullName,
-        specialty: practitioner.specialty,
-        email: practitioner.email,
-        license: practitioner.license,
-        phone: practitioner.phone,
-        city: practitioner.city,
-      }
-    : {
-        fullName: sessionPractitioner.fullName,
-        specialty: sessionPractitioner.specialty,
-        email: sessionPractitioner.email,
-        license: sessionPractitioner.license,
-        phone: null,
-        city: null,
-      };
+  if (isDemoMode()) {
+    profile = { ...DEMO_PRACTITIONER_PROFILE };
+  } else {
+    const practitioner = await prisma.practitioner.findUnique({
+      where: { id: sessionPractitioner.id },
+      select: {
+        fullName: true,
+        specialty: true,
+        email: true,
+        phone: true,
+        license: true,
+        city: true,
+      },
+    });
+
+    profile = practitioner
+      ? {
+          fullName: practitioner.fullName,
+          specialty: practitioner.specialty,
+          email: practitioner.email,
+          license: practitioner.license,
+          phone: practitioner.phone,
+          city: practitioner.city,
+        }
+      : {
+          fullName: sessionPractitioner.fullName,
+          specialty: sessionPractitioner.specialty,
+          email: sessionPractitioner.email,
+          license: sessionPractitioner.license,
+          phone: null,
+          city: null,
+        };
+  }
+
   const initials = initialsFromName(profile.fullName);
-
   const fields = [
     { label: "Nombre", value: profile.fullName },
     { label: "Especialidad", value: profile.specialty },
@@ -72,7 +80,9 @@ export default async function PortalPerfilPage() {
         Perfil
       </h1>
       <p className="mt-2 text-slate-500">
-        Datos del profesional autenticado.
+        {isDemoMode()
+          ? "Médico de demostración. No proviene de la base de datos."
+          : "Datos del profesional autenticado."}
       </p>
 
       <div className="mt-8 rounded-[24px] bg-white p-6 shadow-[0_12px_40px_rgba(15,23,42,.06)] ring-1 ring-slate-100 lg:p-8">

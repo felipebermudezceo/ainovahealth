@@ -1,4 +1,5 @@
-import { isVisibleInCurrentMode, patientScopeWhere } from "@/lib/auth/demo";
+import { isDemoMode, isVisibleInCurrentMode, patientScopeWhere } from "@/lib/auth/demo";
+import { getDemoPatient, listDemoPatients } from "@/lib/demo/portal-data";
 import { requirePractitioner } from "@/lib/auth/session";
 import { prisma } from "@/lib/db/prisma";
 import type { OperationalStatusValue } from "./constants";
@@ -54,6 +55,9 @@ function toListItem(patient: {
 
 export async function listPatients(query?: string): Promise<PatientListItem[]> {
   await requirePractitioner();
+  if (isDemoMode()) {
+    return listDemoPatients(query);
+  }
   const q = query?.trim();
   const search = q
     ? {
@@ -78,6 +82,9 @@ export async function listPatients(query?: string): Promise<PatientListItem[]> {
 
 export async function getPatient(id: string): Promise<PatientDetail | null> {
   await requirePractitioner();
+  if (isDemoMode()) {
+    return getDemoPatient(id);
+  }
   const patient = await prisma.patient.findUnique({ where: { id } });
   if (!patient || !isVisibleInCurrentMode(patient.displayCode)) return null;
 

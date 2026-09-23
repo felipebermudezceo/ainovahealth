@@ -28,12 +28,13 @@ import {
   isVisibleInCurrentMode,
   scopeMismatchMessage,
 } from "@/lib/auth/demo";
-import { ensureDemoPractitioner } from "@/lib/auth/demo-practitioner";
+import { getDemoPractitioner } from "@/lib/auth/demo-practitioner";
+import { DEMO_WRITE_MESSAGE, getDemoEncounterForPatient } from "@/lib/demo/portal-data";
 import { requirePractitioner } from "@/lib/auth/session";
 
 async function requireActivePractitioner() {
   if (isDemoMode()) {
-    return ensureDemoPractitioner();
+    return getDemoPractitioner();
   }
 
   const sessionPractitioner = await requirePractitioner();
@@ -62,6 +63,13 @@ function revalidateEncounter(encounterId: string, patientId: string) {
 
 export async function createDraftEncounter(patientId: string) {
   const practitioner = await requireActivePractitioner();
+  if (isDemoMode()) {
+    const existing = getDemoEncounterForPatient(patientId);
+    if (existing) {
+      redirect(`/portal/historia-clinica/${existing.id}`);
+    }
+    redirect("/portal/historia-clinica");
+  }
   const patient = await prisma.patient.findUnique({
     where: { id: patientId },
     select: { id: true, displayCode: true },
@@ -94,6 +102,9 @@ export async function saveDraftEncounter(input: {
   form: ClinicalFormValues;
 }): Promise<SaveDraftResult> {
   const practitioner = await requireActivePractitioner();
+  if (isDemoMode()) {
+    return { error: DEMO_WRITE_MESSAGE };
+  }
   const parsed = parseDraftForm(input.form, {
     encounterId: input.encounterId,
     patientId: input.patientId,
@@ -353,6 +364,9 @@ export async function markEncounterInReview(input: {
   version: number;
 }): Promise<EncounterStatusResult> {
   const practitioner = await requireActivePractitioner();
+  if (isDemoMode()) {
+    return { error: DEMO_WRITE_MESSAGE };
+  }
   const current = await prisma.encounter.findUnique({
     where: { id: input.encounterId },
     select: {
@@ -433,6 +447,9 @@ export async function finalizeEncounter(input: {
   version: number;
 }): Promise<EncounterStatusResult> {
   const practitioner = await requireActivePractitioner();
+  if (isDemoMode()) {
+    return { error: DEMO_WRITE_MESSAGE };
+  }
 
   try {
     const result = await prisma.$transaction(async (tx: PrismaTransactionClient) => {

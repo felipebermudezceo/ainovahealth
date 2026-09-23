@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { isDemoMode } from "@/lib/auth/demo";
 import { listPatients } from "@/lib/patients/queries";
 import { STATUS_LABELS } from "@/lib/patients/constants";
 
@@ -11,6 +12,7 @@ export default async function PortalPacientesPage({
 }) {
   const { q } = await searchParams;
   const patients = await listPatients(q);
+  const demo = isDemoMode();
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -20,7 +22,9 @@ export default async function PortalPacientesPage({
             Pacientes
           </h1>
           <p className="mt-2 text-slate-500">
-            Ficha maestra conectada a PostgreSQL. No hay eliminación física.
+            {demo
+              ? "Fichas ficticias de demostración. No se consultan pacientes reales."
+              : "Ficha maestra conectada a PostgreSQL. No hay eliminación física."}
           </p>
         </div>
         <Link

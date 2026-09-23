@@ -1,15 +1,12 @@
 import { redirect } from "next/navigation";
 import { isDemoMode } from "@/lib/auth/demo";
-import { getSessionPractitioner } from "@/lib/auth/session";
+import { getAuthenticatedPractitioner } from "@/lib/auth/session";
 import { LoginForm } from "./LoginForm";
 
 export default async function PortalLoginPage() {
-  if (isDemoMode()) {
-    redirect("/portal");
-  }
-  if (await getSessionPractitioner()) {
+  if (!isDemoMode() && (await getAuthenticatedPractitioner())) {
     redirect("/portal");
   }
 
-  return <LoginForm />;
+  return <LoginForm demoEnabled={isDemoMode()} />;
 }
