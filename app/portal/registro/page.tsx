@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 import { isDemoMode } from "@/lib/auth/demo";
 import { getSessionPractitioner } from "@/lib/auth/session";
-import { LoginForm } from "./LoginForm";
+import { RegisterForm } from "./RegisterForm";
 
-export default async function PortalLoginPage() {
+export default async function PortalRegisterPage() {
   if (isDemoMode()) {
     redirect("/portal");
   }
@@ -11,5 +11,5 @@ export default async function PortalLoginPage() {
     redirect("/portal");
   }
 
-  return <LoginForm />;
+  return <RegisterForm />;
 }

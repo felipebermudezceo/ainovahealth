@@ -41,7 +41,11 @@ export function PortalShell({
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  if (pathname === "/portal/login") {
+  if (
+    pathname === "/portal/login" ||
+    pathname === "/portal/registro" ||
+    pathname === "/portal/recuperar-contrasena"
+  ) {
     return <>{children}</>;
   }
 

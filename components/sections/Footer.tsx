@@ -283,8 +283,12 @@ export function Footer() {
         Términos
       </a>
 
-      <a href="#" className="transition hover:text-white">
+      <a href="#contacto" className="transition hover:text-white">
         Contacto
+      </a>
+
+      <a href="/portal/login" className="transition hover:text-white">
+        Acceso médico
       </a>
 
     </div>

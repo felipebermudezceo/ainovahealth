@@ -156,6 +156,14 @@ export function Navbar() {
 
         {/* BOTON */}
 
+        <div className="hidden items-center gap-3 lg:flex">
+          <Link
+            href="/portal/login"
+            className="inline-flex h-[48px] items-center rounded-full border-2 border-[#0A3D49] px-5 text-[14px] font-bold text-[#0A3D49] transition-all duration-300 hover:bg-[#0A3D49] hover:text-white"
+          >
+            Acceso médico
+          </Link>
+
         <div className="relative hidden xl:block">
 
   {/* Luz verde */}
@@ -184,6 +192,14 @@ export function Navbar() {
     </a>
 
 </div>
+        </div>
+        <div className="flex items-center gap-2 lg:hidden">
+          <Link
+            href="/portal/login"
+            className="rounded-full border-2 border-[#0A3D49] px-3 py-2 text-[13px] font-bold text-[#0A3D49]"
+          >
+            Acceso médico
+          </Link>
 {/* BOTÓN HAMBURGUESA */}
 
 <button
@@ -206,6 +222,7 @@ export function Navbar() {
     <Menu className="h-7 w-7 text-slate-800" />
   )}
 </button>
+        </div>
       </div>
       {open && (
   <div className="absolute top-[90px] left-4 right-4 rounded-3xl bg-white p-6 shadow-2xl lg:hidden">
@@ -260,6 +277,13 @@ export function Navbar() {
         </li>
       ))}
     </ul>
+    <Link
+      href="/portal/login"
+      onClick={() => setOpen(false)}
+      className="mt-6 flex w-full items-center justify-center rounded-full border-2 border-[#0A3D49] px-5 py-3 text-[16px] font-bold text-[#0A3D49]"
+    >
+      Acceso médico
+    </Link>
   </div>
 )}
     </header>

@@ -18,7 +18,13 @@ export const authConfig = {
     authorized({ auth, request }) {
       const { pathname } = request.nextUrl;
       if (!pathname.startsWith("/portal")) return true;
-      if (pathname === "/portal/login") return true;
+      if (
+        pathname === "/portal/login" ||
+        pathname === "/portal/registro" ||
+        pathname === "/portal/recuperar-contrasena"
+      ) {
+        return true;
+      }
       if (isDemoMode()) return true;
       return Boolean(auth?.practitioner?.id);
     },

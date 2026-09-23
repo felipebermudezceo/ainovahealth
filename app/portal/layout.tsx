@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { PortalShell } from "@/components/portal/PortalShell";
-import { getSessionPractitioner } from "@/lib/auth/session";
+import { getLayoutPractitioner } from "@/lib/auth/session";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Portal médico | AinovaHealth",
@@ -16,7 +18,7 @@ export default async function PortalLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const practitioner = await getSessionPractitioner();
+  const practitioner = await getLayoutPractitioner();
 
   return <PortalShell practitioner={practitioner}>{children}</PortalShell>;
 }

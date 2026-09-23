@@ -7,8 +7,6 @@ export type LoginState = {
   error?: string;
 };
 
-const genericError = "No se pudo iniciar sesión.";
-
 export async function loginAction(
   _prev: LoginState,
   formData: FormData,
@@ -17,7 +15,7 @@ export async function loginAction(
   const password = String(formData.get("password") ?? "");
 
   if (!email || !password) {
-    return { error: genericError };
+    return { error: "Ingresa tu correo electrónico y tu contraseña." };
   }
 
   try {
@@ -28,10 +26,18 @@ export async function loginAction(
     });
   } catch (error) {
     if (error instanceof AuthError) {
-      return { error: genericError };
+      if (error.type === "CredentialsSignin") {
+        return { error: "Correo o contraseña incorrectos." };
+      }
+      return {
+        error:
+          "No se pudo iniciar sesión. Verifica tus datos o intenta de nuevo.",
+      };
     }
     throw error;
   }
 
-  return { error: genericError };
+  return {
+    error: "No se pudo iniciar sesión. Verifica tus datos o intenta de nuevo.",
+  };
 }
