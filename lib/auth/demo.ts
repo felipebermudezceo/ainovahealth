@@ -2,7 +2,7 @@ export const DEMO_CODE_PREFIX = "DEMO-";
 export const DEMO_PRACTITIONER_EMAIL = "demo.portal@ainovahealth.local";
 
 export function isDemoMode() {
-  return process.env.DEMO_MODE === "true";
+  return process.env.DEMO_MODE?.trim() === "true";
 }
 
 export function isDemoDisplayCode(displayCode: string) {

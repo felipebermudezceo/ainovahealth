@@ -1,5 +1,6 @@
 import type { AntecedentType } from "@prisma/client";
 import { isVisibleInCurrentMode, patientScopeWhere } from "@/lib/auth/demo";
+import { requirePractitioner } from "@/lib/auth/session";
 import { prisma } from "@/lib/db/prisma";
 import { formatUpdatedAt } from "@/lib/patients/validation";
 import {
@@ -58,6 +59,7 @@ function joinByType(
 export async function listPatientEncounters(
   patientId: string,
 ): Promise<EncounterListItem[]> {
+  await requirePractitioner();
   const encounters = await prisma.encounter.findMany({
     where: { patientId, patient: patientScopeWhere() },
     orderBy: [{ attendedOn: "desc" }, { updatedAt: "desc" }],
@@ -86,6 +88,7 @@ export async function listPatientEncounters(
 export async function listRecentEncounters(
   take = 40,
 ): Promise<(EncounterListItem & { patientName: string; displayCode: string; patientId: string })[]> {
+  await requirePractitioner();
   const encounters = await prisma.encounter.findMany({
     where: { patient: patientScopeWhere() },
     orderBy: { updatedAt: "desc" },
@@ -120,6 +123,7 @@ export async function listRecentEncounters(
 export async function getEncounterEditor(
   encounterId: string,
 ): Promise<EncounterEditorData | null> {
+  await requirePractitioner();
   const encounter = await prisma.encounter.findUnique({
     where: { id: encounterId },
     include: {

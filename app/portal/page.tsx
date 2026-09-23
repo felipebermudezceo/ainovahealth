@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { mockRecentVisits, mockStats } from "@/components/portal/mock-data";
 import { isDemoMode } from "@/lib/auth/demo";
+import { requirePractitioner } from "@/lib/auth/session";
 
 const cards = [
   {
@@ -35,7 +36,8 @@ const cards = [
   },
 ];
 
-export default function PortalHomePage() {
+export default async function PortalHomePage() {
+  await requirePractitioner();
   const demo = isDemoMode();
 
   return (

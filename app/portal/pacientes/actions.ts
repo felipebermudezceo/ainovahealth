@@ -6,6 +6,7 @@ import {
   isVisibleInCurrentMode,
   scopeMismatchMessage,
 } from "@/lib/auth/demo";
+import { requirePractitioner } from "@/lib/auth/session";
 import { isPrismaUniqueConflict, prisma } from "@/lib/db/prisma";
 import {
   nextDemoPatientDisplayCode,
@@ -49,6 +50,7 @@ export async function createPatient(
   _prev: PatientFormState,
   formData: FormData,
 ): Promise<PatientFormState> {
+  await requirePractitioner();
   const parsed = parsePatientForm(formData);
   if ("error" in parsed && parsed.error) return parsed;
 
@@ -78,6 +80,7 @@ export async function updatePatient(
   _prev: PatientFormState,
   formData: FormData,
 ): Promise<PatientFormState> {
+  await requirePractitioner();
   const parsed = parsePatientForm(formData);
   if ("error" in parsed && parsed.error) return parsed;
 

@@ -16,10 +16,10 @@ export const authConfig = {
   providers: [],
   callbacks: {
     authorized({ auth, request }) {
-      if (isDemoMode()) return true;
       const { pathname } = request.nextUrl;
       if (!pathname.startsWith("/portal")) return true;
       if (pathname === "/portal/login") return true;
+      if (isDemoMode()) return true;
       return Boolean(auth?.practitioner?.id);
     },
     jwt({ token, user }) {

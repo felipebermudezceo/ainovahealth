@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { createPatient } from "../actions";
 import { PatientForm } from "@/components/portal/PatientForm";
+import { requirePractitioner } from "@/lib/auth/session";
 
 export const dynamic = "force-dynamic";
 
-export default function NuevoPacientePage() {
+export default async function NuevoPacientePage() {
+  await requirePractitioner();
   return (
     <div className="mx-auto max-w-3xl">
       <p className="text-sm text-slate-500">

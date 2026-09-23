@@ -1,7 +1,9 @@
 import { mockRecentVisits, mockStats } from "@/components/portal/mock-data";
 import { isDemoMode } from "@/lib/auth/demo";
+import { requirePractitioner } from "@/lib/auth/session";
 
-export default function PortalDashboardPage() {
+export default async function PortalDashboardPage() {
+  await requirePractitioner();
   const demo = isDemoMode();
 
   return (

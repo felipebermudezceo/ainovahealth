@@ -1,5 +1,5 @@
 import type { SessionPractitioner } from "@/types/next-auth";
-import { DEMO_PRACTITIONER_EMAIL } from "@/lib/auth/demo";
+import { DEMO_PRACTITIONER_EMAIL, isDemoMode } from "@/lib/auth/demo";
 import { prisma } from "@/lib/db/prisma";
 
 const DEMO_PROFILE = {
@@ -12,6 +12,9 @@ const DEMO_PROFILE = {
 let demoPractitioner: SessionPractitioner | undefined;
 
 export async function ensureDemoPractitioner(): Promise<SessionPractitioner> {
+  if (!isDemoMode()) {
+    throw new Error("El usuario demo solo existe cuando DEMO_MODE=true.");
+  }
   if (demoPractitioner) {
     return demoPractitioner;
   }

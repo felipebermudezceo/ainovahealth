@@ -1,4 +1,5 @@
 import { isVisibleInCurrentMode, patientScopeWhere } from "@/lib/auth/demo";
+import { requirePractitioner } from "@/lib/auth/session";
 import { prisma } from "@/lib/db/prisma";
 import type { OperationalStatusValue } from "./constants";
 import { formatBirthDate, formatUpdatedAt } from "./validation";
@@ -52,6 +53,7 @@ function toListItem(patient: {
 }
 
 export async function listPatients(query?: string): Promise<PatientListItem[]> {
+  await requirePractitioner();
   const q = query?.trim();
   const search = q
     ? {
@@ -75,6 +77,7 @@ export async function listPatients(query?: string): Promise<PatientListItem[]> {
 }
 
 export async function getPatient(id: string): Promise<PatientDetail | null> {
+  await requirePractitioner();
   const patient = await prisma.patient.findUnique({ where: { id } });
   if (!patient || !isVisibleInCurrentMode(patient.displayCode)) return null;
 
