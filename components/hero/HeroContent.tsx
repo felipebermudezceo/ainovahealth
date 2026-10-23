@@ -40,12 +40,12 @@ export function HeroContent() {
 
   return (
     <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-      {/* Selector Dinámico de Ciudad (Evento Interactivo de la Landing) */}
+      {/* Selector Dinámico de Ciudad (Bogotá / Medellín) */}
       <div className="inline-flex items-center rounded-xl border border-slate-200 bg-slate-100/90 p-1 text-xs">
         <button
           type="button"
           onClick={() => setSelectedCity("bogota")}
-          className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 font-semibold transition ${
+          className={`flex items-center gap-1.5 rounded-lg px-4 py-1.5 font-semibold transition ${
             selectedCity === "bogota"
               ? "bg-white text-[#083946] shadow-xs"
               : "text-slate-600 hover:text-slate-900"
@@ -58,7 +58,7 @@ export function HeroContent() {
         <button
           type="button"
           onClick={() => setSelectedCity("medellin")}
-          className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 font-semibold transition ${
+          className={`flex items-center gap-1.5 rounded-lg px-4 py-1.5 font-semibold transition ${
             selectedCity === "medellin"
               ? "bg-white text-[#083946] shadow-xs"
               : "text-slate-600 hover:text-slate-900"
@@ -107,12 +107,6 @@ export function HeroContent() {
             <Check className="h-3.5 w-3.5" />
           </div>
           <span>Atención médica cercana, con tiempo para escucharte y examinarte</span>
-        </div>
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-[#16A34A]">
-            <Check className="h-3.5 w-3.5" />
-          </div>
-          <span>Atención en hogares, hoteles y Airbnb <em>(English spoken)</em></span>
         </div>
       </div>
 
