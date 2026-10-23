@@ -6,23 +6,22 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ainovahealth.com"),
 
   title:
-    "Médico a Domicilio en Bogotá | Atención Médica en Casa 24 Horas | AinovaHealth",
+    "Médico a Domicilio en Bogotá y Medellín 24/7 | AinovaHealth",
 
   description:
-    "Solicita un médico a domicilio en Bogotá. Atención médica en casa, medicina general, pediatría, nebulizaciones, teleconsulta y atención médica 24 horas. Agenda tu consulta por WhatsApp.",
+    "Servicio médico particular a domicilio en Bogotá y Medellín las 24 horas. Médicos dedicados y humanos en tu casa para medicina general, pediatría, lavado de oídos y procedimientos sin esperas de EPS ni suscripciones.",
 
   keywords: [
-    "médico a domicilio",
+    "médico a domicilio particular",
     "médico a domicilio Bogotá",
-    "doctor a domicilio",
-    "doctor a domicilio Bogotá",
-    "consulta médica a domicilio",
-    "servicio médico a domicilio",
-    "atención médica en casa",
-    "médico general",
+    "médico a domicilio Medellín",
+    "doctor a domicilio sin suscripción",
+    "consulta médica particular en casa",
+    "médico general a domicilio",
     "pediatra a domicilio",
-    "teleconsulta",
-    "nebulizaciones a domicilio",
+    "lavado de oídos a domicilio",
+    "electrocardiograma a domicilio",
+    "laboratorios a domicilio",
     "AinovaHealth",
   ],
 
@@ -37,40 +36,76 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "Médico a Domicilio en Bogotá | Atención Médica en Casa 24 Horas | AinovaHealth",
+      "Médico a Domicilio en Bogotá y Medellín 24/7 | AinovaHealth",
 
     description:
-      "Solicita un médico a domicilio en Bogotá. Atención médica rápida y profesional en tu hogar.",
+      "Atención médica profesional en casa. Diagnóstico clínico completo, recetas oficiales y cuidados de salud sin desplazamientos.",
 
     url: "https://ainovahealth.com",
-
     siteName: "AinovaHealth",
-
     locale: "es_CO",
-
     type: "website",
-
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "AinovaHealth",
+        alt: "AinovaHealth - Atención Médica Domiciliaria",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-
     title:
-      "Médico a Domicilio en Bogotá | Atención Médica en Casa 24 Horas | AinovaHealth",
-
+      "Médico a Domicilio en Bogotá y Medellín | AinovaHealth",
     description:
-      "Solicita un médico a domicilio en Bogotá. Agenda por WhatsApp.",
-
+      "Atención médica profesional en casa 24/7. Agende por WhatsApp o llamada directa.",
     images: ["/og-image.png"],
   },
+};
+
+const medicalSchema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  name: "AinovaHealth",
+  legalName: "AinovaHealth Atención Médica Domiciliaria",
+  description:
+    "Servicio de atención médica a domicilio profesional en Bogotá, Medellín y Sabana de Bogotá.",
+  url: "https://ainovahealth.com",
+  telephone: "+573007239175",
+  priceRange: "$$",
+  currenciesAccepted: "COP",
+  paymentAccepted: "Cash, Credit Card, Debit Card, PSE, Nequi",
+  areaServed: [
+    { "@type": "City", name: "Bogotá" },
+    { "@type": "City", name: "Medellín" },
+    { "@type": "City", name: "Chía" },
+    { "@type": "City", name: "Cota" },
+    { "@type": "City", name: "Envigado" },
+  ],
+  availableService: [
+    {
+      "@type": "MedicalProcedure",
+      name: "Medicina General a Domicilio",
+    },
+    {
+      "@type": "MedicalProcedure",
+      name: "Pediatría a Domicilio",
+    },
+    {
+      "@type": "MedicalProcedure",
+      name: "Lavado de Oídos a Domicilio",
+    },
+    {
+      "@type": "MedicalProcedure",
+      name: "Electrocardiograma a Domicilio",
+    },
+    {
+      "@type": "MedicalProcedure",
+      name: "Laboratorio Clínico a Domicilio",
+    },
+  ],
 };
 
 export default function PublicLayout({
@@ -82,6 +117,13 @@ export default function PublicLayout({
     <>
       <GoogleTagManager gtmId="GTM-5MKF9RB8" />
 
+      {/* Marcado Schema.org Médico para SEO y SEM */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalSchema) }}
+      />
+
+      {/* Script Oficial de Clixtell */}
       <Script id="clixtell-tracking" strategy="afterInteractive">
         {`
             (function() {

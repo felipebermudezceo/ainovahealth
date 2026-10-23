@@ -1,72 +1,45 @@
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 
 export function CTA() {
   return (
-    <section className="px-4 pb-20">
-
+    <section className="px-4 pb-16 sm:pb-20">
       <div className="mx-auto max-w-[1280px]">
-
-      <div className="overflow-hidden rounded-[32px] bg-gradient-to-r from-[#0A3D49] via-[#10685D] to-[#27B96D] px-8 lg:px-12 py-10">
-
+        <div className="overflow-hidden rounded-3xl bg-[#083946] px-6 py-10 sm:px-12 sm:py-12">
           <div className="flex flex-col items-center justify-between gap-8 lg:flex-row">
-
-            {/* Texto */}
-
-            <div>
-
-              <h2 className="text-[42px] font-black leading-none text-white">
-                Tu salud no puede esperar.
+            <div className="text-center lg:text-left">
+              <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl">
+                ¿Necesitas un médico en casa hoy?
               </h2>
-
-              <p className="mt-3 max-w-[520px] text-[18px] text-white/90">
-                Solicita un médico a domicilio 24/7 y recibe atención profesional sin salir de casa.
+              <p className="mt-3 max-w-[560px] text-base leading-relaxed text-slate-200">
+                Escríbenos o llámanos ahora. Coordinamos la visita de un médico dedicado para atenderte en Bogotá o Medellín en 45 a 60 minutos, sin trámites de EPS ni suscripciones.
               </p>
-
             </div>
 
-            {/* Botón */}
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <a
+                href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20requiero%20atenci%C3%B3n%20m%C3%A9dica%20a%20domicilio.%20Mi%20nombre%20es..."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 rounded-xl bg-[#22C55E] px-6 py-3.5 font-bold text-white shadow-sm transition hover:bg-[#16A34A]"
+              >
+                <FaWhatsapp className="text-2xl" />
+                <div className="text-left">
+                  <p className="text-sm font-bold">Solicitar por WhatsApp</p>
+                  <p className="text-[11px] font-normal text-white/90">Respuesta y triaje ágil</p>
+                </div>
+              </a>
 
-            <a
-  href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20Quisiera%20Agendar%20Una%20Cita%2C%20Mi%20nombre%20es..."
-  target="_blank"
-  rel="noopener noreferrer"
-  className="
-    flex
-    items-center
-    gap-3
-    rounded-full
-    bg-[#25D366]
-    px-7
-    py-4
-    lg:px-9
-    shadow-[0_20px_45px_rgba(37,211,102,.30)]
-    transition
-    hover:scale-[1.02]
-  "
->
-
-<FaWhatsapp className="text-[28px] text-white" />
-
-<div className="text-left">
-
-<p className="text-[18px] font-bold text-white lg:text-[20px]">
-  Solicitar Médico Ahora
-</p>
-
-<p className="mt-1 text-[13px] text-white/80">
-  Respuesta inmediata por whatsapp
-</p>
-
-</div>
-
-</a>
-
+              <a
+                href="tel:+573007239175"
+                className="flex items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-white/10 px-5 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20"
+              >
+                <FaPhoneAlt className="text-sm text-emerald-300" />
+                <span>Llamar Ahora</span>
+              </a>
+            </div>
           </div>
-
         </div>
-
       </div>
-
     </section>
   );
 }

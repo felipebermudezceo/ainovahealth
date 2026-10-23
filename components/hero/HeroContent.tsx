@@ -1,370 +1,139 @@
 "use client";
-import { FaWhatsapp } from "react-icons/fa";
-import { motion } from "framer-motion";
+
+import { useState } from "react";
+import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
+import { Check, MapPin } from "lucide-react";
 
 export function HeroContent() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -80 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{
-        duration: 0.9,
-        ease: "easeOut",
-      }}
-      className="flex justify-center items-center"
-    >
-      <div className="w-full max-w-[620px] px-5 pt-6 pb-6 lg:px-16 lg:py-20">
+  const [selectedCity, setSelectedCity] = useState<"bogota" | "medellin">("bogota");
 
-        {/* Badge */}
-        <motion.div
-  initial={{ opacity: 0, y: -20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.5 }}
-  className="flex justify-center lg:justify-start"
->
-
-<div className="inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-5 py-2 text-xs font-semibold uppercase tracking-[2px] text-white backdrop-blur-md">
-
-<span className="relative flex h-3 w-3">
-
-  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#25D366] opacity-70"></span>
-
-  <span className="relative inline-flex h-3 w-3 rounded-full bg-[#25D366] shadow-[0_0_16px_rgba(37,211,102,1)]"></span>
-
-</span>
-
-<span>
-  Atención médica a domicilio
-</span>
-
-</div>
-
-  </motion.div>
-
-        {/* Título */}
-        <motion.h1
-  className="mt-4 leading-none lg:mt-6"
-  initial={{ opacity: 0, x: -50 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{
-    delay: 0.2,
-    duration: 0.7,
-  }}
->
-
-  {/* DESKTOP */}
-
-  <div className="hidden lg:block">
-
-    <span className="block text-[72px] font-black text-white">
-    ¿Necesitas un
-    </span>
-
-    <span className="block text-[72px] font-black text-white">
-    médico hoy?
-    </span>
-
-    <div className="mt-6">
-
-  <div className="flex items-center gap-8">
-
-    <div className="h-[2px] w-[170px] lg:w-[230px] rounded-full bg-[#25D366]/80"></div>
-
-    <svg
-      width="90"
-      height="32"
-      viewBox="0 0 120 40"
-      fill="none"
-      className="shrink-0"
-    >
-      <path
-        d="M0 20
-           H28
-           L38 8
-           L48 32
-           L58 5
-           L68 20
-           H120"
-        stroke="#25D366"
-        strokeWidth="3.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-
-  </div>
-
-  <h2 className="mt-6 text-[32px] font-semibold leading-tight text-white">
-
-    Atención médica a domicilio en{" "}
-
-    <span className="font-black text-[#25D366] uppercase tracking-wide">
-      BOGOTÁ Y MEDELLÍN
-    </span>
-
-  </h2>
-
-</div>
-
-  </div>
-
-  {/* MÓVIL */}
-
-  <div className="mx-auto max-w-[340px] text-center lg:hidden">
-
-<span className="block text-[40px] font-black leading-[1.08] tracking-[-0.02em] text-white">
-  ¿Necesitas
-</span>
-
-<span className="block text-[38px] font-black leading-[1.08] tracking-[-0.02em] text-white">
-  un médico hoy?
-</span>
-
-{/* Línea + ECG */}
-
-<div className="mt-4 flex items-center justify-center gap-2.5">
-
-  <div className="h-[2px] w-[66px] rounded-full bg-[#25D366]/80"></div>
-
-  <svg
-    width="58"
-    height="20"
-    viewBox="0 0 120 40"
-    fill="none"
-  >
-    <path
-      d="M0 20
-         H28
-         L38 8
-         L48 32
-         L58 5
-         L68 20
-         H120"
-      stroke="#25D366"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-
-  <div className="h-[2px] w-[66px] rounded-full bg-[#25D366]/80"></div>
-
-</div>
-
-{/* Subtítulo */}
-
-<div className="mt-4">
-
-  <p className="mx-auto max-w-[340px] text-[19px] font-semibold leading-[1.35] text-white">
-    Atención médica a domicilio en
-  </p>
-
-  <p className="mx-auto mt-1.5 max-w-[340px] text-[24px] font-black uppercase leading-[1.18] text-[#25D366]">
-    BOGOTÁ Y MEDELLÍN
-  </p>
-
-</div>
-
-</div>
-
-</motion.h1>
-
-        {/* Descripción */}
-
-        <motion.p
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{
-    delay: 0.45,
-    duration: 0.6,
-  }}
-  className="
-mx-auto
-mt-3
-max-w-[280px]
-text-center
-text-[13px]
-leading-[1.72]
-font-medium
-text-white/90
-lg:mx-0
-lg:mt-4
-lg:max-w-[520px]
-lg:text-left
-lg:text-[22px]
-lg:leading-9
-"
->
-          Recibe atención médica profesional en la comodidad de tu hogar.
-          Atención rápida, segura y sin desplazamientos.
-          </motion.p>
-
-        {/* Chips */}
-
-        <motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{
-    delay: 0.6,
-    duration: 0.5,
-  }}
-  className="
-mt-4
-flex
-flex-wrap
-justify-center
-gap-2
-lg:mt-8
-lg:gap-4
-lg:justify-start
-"
->
-
-<div
-  className="
-    rounded-full
-    border
-    border-white/20
-    bg-white/10
-    px-3
-    py-1.5
-    text-[11px]
-    font-medium
-    text-white/90
-    backdrop-blur-md
-    lg:px-4
-    lg:py-2
-    lg:text-[13px]
-    lg:text-white
-  "
->
-  Sin filas
-</div>
-
-<div
-  className="
-    rounded-full
-    border
-    border-white/20
-    bg-white/10
-    px-3
-    py-1.5
-    text-[11px]
-    font-medium
-    text-white/90
-    backdrop-blur-md
-    lg:px-4
-    lg:py-2
-    lg:text-[13px]
-    lg:text-white
-  "
->
-  Vamos hasta tu hogar
-</div>
-
-<div
-  className="
-    rounded-full
-    border
-    border-white/20
-    bg-white/10
-    px-3
-    py-1.5
-    text-[11px]
-    font-medium
-    text-white/90
-    backdrop-blur-md
-    lg:px-4
-    lg:py-2
-    lg:text-[13px]
-    lg:text-white
-  "
->
-  Atención inmediata
-</div>
-
-          </motion.div>
-
-        {/* Botón */}
-
-<div className="relative mt-4 w-full lg:mt-6 lg:w-fit">
-
-<div className="pointer-events-none absolute inset-0 rounded-full bg-[#25D366]/45 blur-2xl"></div>
-
-<motion.a
-  href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20Quisiera%20Agendar%20Una%20Cita%2C%20Mi%20nombre%20es..."
-  target="_blank"
-  rel="noopener noreferrer"
-  initial={{ opacity: 0, scale: 0.7 }}
-  animate={{ opacity: 1, scale: 1 }}
-  transition={{
-    delay: 0.9,
-    type: "spring",
-    stiffness: 260,
-    damping: 18,
-  }}
-  whileHover={{
-    scale: 1.05,
-    y: -3,
-    transition: {
-      duration: 0.2,
+  const cityData = {
+    bogota: {
+      label: "Bogotá y Sabana",
+      activeDoctors: "Médicos disponibles en Bogotá (Norte, Chapinero, Suba, Teusaquillo, Chía)",
+      eta: "45 a 60 min",
+      waText: "Hola AinovaHealth, necesito solicitar un médico a domicilio en Bogotá. Mi nombre es...",
     },
-  }}
-  whileTap={{
-    scale: 0.98,
-  }}
-  className="
-    relative
-    flex
-    w-full
-    max-w-[320px]
-    mx-auto
+    medellin: {
+      label: "Medellín y Valle de Aburrá",
+      activeDoctors: "Médicos disponibles en Medellín (Poblado, Laureles, Envigado, Belén, Sabaneta)",
+      eta: "40 a 55 min",
+      waText: "Hola AinovaHealth, necesito solicitar un médico a domicilio en Medellín. Mi nombre es...",
+    },
+  };
 
-    lg:max-w-[380px]
-    lg:mx-0
-    lg:w-auto
+  const current = cityData[selectedCity];
 
-    items-center
-    justify-center
-    gap-3
+  const handleTrackClick = (type: "whatsapp" | "call") => {
+    if (typeof window !== "undefined") {
+      const dataLayer = (window as unknown as { dataLayer?: Array<Record<string, unknown>> }).dataLayer;
+      if (Array.isArray(dataLayer)) {
+        dataLayer.push({
+          event: type === "whatsapp" ? "whatsapp_click" : "call_click",
+          lead_type: type,
+          city: selectedCity,
+          location: "hero",
+        });
+      }
+    }
+  };
 
-    rounded-full
-    border
-    border-[#B9FFD0]
+  return (
+    <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+      {/* Selector Dinámico de Ciudad (Evento Interactivo de la Landing) */}
+      <div className="inline-flex items-center rounded-xl border border-slate-200 bg-slate-100/90 p-1 text-xs">
+        <button
+          type="button"
+          onClick={() => setSelectedCity("bogota")}
+          className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 font-semibold transition ${
+            selectedCity === "bogota"
+              ? "bg-white text-[#083946] shadow-xs"
+              : "text-slate-600 hover:text-slate-900"
+          }`}
+        >
+          <MapPin className="h-3.5 w-3.5 text-[#16A34A]" />
+          <span>Bogotá y Sabana</span>
+        </button>
 
-    bg-gradient-to-b
-    from-[#31DD6E]/90
-    to-[#19B858]/90
-
-    px-5
-    py-3
-
-    lg:px-6
-    lg:py-5
-
-    shadow-[0_20px_45px_rgba(37,211,102,.35)]
-  "
->
-
-  <div className="flex h-10 w-10 lg:h-14 lg:w-14 items-center justify-center rounded-full bg-white/10">
-    <FaWhatsapp className="text-[24px] lg:text-[31px] text-white" />
-  </div>
-
-  <div className="text-left">
-    <p className="text-[16px] lg:text-[20px] font-bold text-white">
-      Solicitar Médico Ahora
-    </p>
-
-    <p className="text-[12px] lg:text-[13px] text-white/90">
-      Respuesta inmediata por WhatsApp
-    </p>
-  </div>
-
-</motion.a>
-
-</div>
-
+        <button
+          type="button"
+          onClick={() => setSelectedCity("medellin")}
+          className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 font-semibold transition ${
+            selectedCity === "medellin"
+              ? "bg-white text-[#083946] shadow-xs"
+              : "text-slate-600 hover:text-slate-900"
+          }`}
+        >
+          <MapPin className="h-3.5 w-3.5 text-[#16A34A]" />
+          <span>Medellín y Aburrá</span>
+        </button>
       </div>
-      </motion.div>
+
+      {/* Indicador de Disponibilidad en Tiempo Real */}
+      <div className="mt-3 flex items-center gap-2 text-xs text-slate-600">
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#16A34A]" />
+        </span>
+        <span className="font-medium text-emerald-800">{current.activeDoctors}</span>
+      </div>
+
+      {/* Título Principal Limpio, Serio y Profesional */}
+      <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[#083946] sm:text-4xl lg:text-[44px] lg:leading-[1.2]">
+        Médico particular a domicilio en {selectedCity === "bogota" ? "Bogotá" : "Medellín"}
+      </h1>
+
+      {/* Subtítulo Empático y Orientado al Paciente */}
+      <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
+        Atención médica presencial en tu hogar cuando no puedes trasladarte. Sin filas de urgencias, sin contratos mensuales ni suscripciones: pagas únicamente la visita que necesitas.
+      </p>
+
+      {/* Lista de Compromisos Médicos con Estilo Sobrio y Confiable */}
+      <div className="mt-6 space-y-2.5 text-left text-sm text-slate-700">
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-[#16A34A]">
+            <Check className="h-3.5 w-3.5" />
+          </div>
+          <span>Tiempo estimado de llegada: <strong>{current.eta}</strong></span>
+        </div>
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-[#16A34A]">
+            <Check className="h-3.5 w-3.5" />
+          </div>
+          <span>Fórmula médica e incapacidad en la misma consulta</span>
+        </div>
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-[#16A34A]">
+            <Check className="h-3.5 w-3.5" />
+          </div>
+          <span>Atención médica cercana, con tiempo para escucharte y examinarte</span>
+        </div>
+      </div>
+
+      {/* Acciones Directas de Contacto */}
+      <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+        <a
+          href={`https://wa.me/573007239175?text=${encodeURIComponent(current.waText)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => handleTrackClick("whatsapp")}
+          id="hero-btn-whatsapp"
+          className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#16A34A] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#15803D]"
+        >
+          <FaWhatsapp className="text-xl" />
+          <span>Solicitar médico en {selectedCity === "bogota" ? "Bogotá" : "Medellín"}</span>
+        </a>
+
+        <a
+          href="tel:+573007239175"
+          onClick={() => handleTrackClick("call")}
+          id="hero-btn-call"
+          className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-semibold text-[#083946] shadow-2xs transition hover:bg-slate-50 hover:border-slate-400"
+        >
+          <FaPhoneAlt className="text-xs text-[#16A34A]" />
+          <span>Llamar al 300 723 9175</span>
+        </a>
+      </div>
+    </div>
   );
 }

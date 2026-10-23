@@ -57,25 +57,26 @@ export function Conditions() {
     >
       <div className="mx-auto max-w-[1280px]">
 
-        <h2 className="text-center text-[42px] font-black text-slate-900">
+        <h2 className="text-center text-3xl sm:text-4xl font-semibold tracking-tight text-[#083946]">
           ¿Qué atendemos?
         </h2>
 
-        <p className="mt-2 text-center text-slate-500">
-          Atención para niños, adultos y adultos mayores
+        <p className="mt-2 text-center text-slate-600 text-sm sm:text-base">
+          Atención médica particular a domicilio para niños, adultos y adultos mayores
         </p>
 
-        <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-[#21C56A]" />
+        <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-[#16A34A]" />
 
         <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-8">
-
           {items.map((item, index) => {
             const Icon = item.icon;
 
             return (
               <a
                 key={item.title}
-                href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20Quisiera%20Agendar%20Una%20Cita%2C%20Mi%20nombre%20es..."
+                href={`https://wa.me/573007239175?text=${encodeURIComponent(
+                  `Hola AinovaHealth, quisiera consultar y solicitar atención a domicilio para: ${item.title}. Mi nombre es...`
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group"

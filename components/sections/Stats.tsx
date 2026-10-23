@@ -1,114 +1,59 @@
+import { Users, HeartHandshake, Clock, CheckCircle2 } from "lucide-react";
+
 export function Stats() {
   const items = [
     {
-      icon: "👨‍👩‍👧",
-      title: "Más de",
-      value: "+2.500",
-      subtitle: "Familias atendidas",
+      icon: HeartHandshake,
+      value: "100% Humano",
+      subtitle: "Atención cercana, paciente y sin prisas",
     },
     {
-      icon: "🛡️",
-      value: "Médicos",
-      subtitle: "certificados",
+      icon: Clock,
+      value: "45 a 60 min",
+      subtitle: "Tiempo estimado de llegada a tu casa",
     },
     {
-      icon: "🏠",
-      value: "Llegamos",
-      subtitle: "hasta tu hogar",
+      icon: Users,
+      value: "24 / 7",
+      subtitle: "Disponible de domingo a domingo",
     },
     {
-      icon: "💚",
-      value: "Atención cálida",
-      subtitle: "y humana",
+      icon: CheckCircle2,
+      value: "Sin Planes",
+      subtitle: "Pagas solo la consulta que recibes",
     },
   ];
 
   return (
-    <section className="relative z-30 -mt-10 px-4">
+    <section className="relative z-30 -mt-8 px-4 sm:-mt-10">
       <div className="mx-auto max-w-[1280px]">
+        <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-md">
+          <div className="grid grid-cols-2 divide-y divide-slate-100 sm:divide-y-0 lg:grid-cols-4 lg:divide-x">
+            {items.map((item, index) => {
+              const Icon = item.icon;
 
-        <div className="overflow-hidden rounded-[30px] border border-white/60 bg-white/95 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,.12)]">
-
-          <div className="grid grid-cols-2 lg:grid-cols-4">
-
-            {items.map((item, index) => (
-
-              <div
-                key={index}
-                className="
-                  flex
-                  flex-col
-                  items-center
-                  justify-center
-                  text-center
-                  px-4
-                  py-8
-                  border-b
-                  border-r
-                  border-slate-100
-                  last:border-r-0
-                  even:border-r-0
-                  lg:flex-row
-                  lg:items-center
-                  lg:justify-start
-                  lg:text-left
-                  lg:px-7
-                  lg:py-8
-                  lg:border-b-0
-                  lg:border-r
-                  lg:last:border-r-0
-                "
-              >
-
-                {/* Icono */}
-
+              return (
                 <div
-                  className="
-                    flex
-                    h-16
-                    w-16
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-2xl
-                    bg-gradient-to-br
-                    from-[#ECFDF5]
-                    to-[#D1FAE5]
-                    text-[30px]
-                    shadow-md
-                  "
+                  key={index}
+                  className="flex flex-col items-center p-5 text-center sm:flex-row sm:items-center sm:justify-start sm:p-6 sm:text-left"
                 >
-                  {item.icon}
-                </div>
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-50 text-[#083946] ring-1 ring-slate-200/70 sm:h-14 sm:w-14">
+                    <Icon className="h-6 w-6 text-[#16A34A]" />
+                  </div>
 
-                {/* Texto */}
-
-                <div className="mt-4 lg:mt-0 lg:ml-5">
-
-                  {item.title && (
-                    <p className="text-[15px] text-slate-500">
-                      {item.title}
+                  <div className="mt-3 sm:mt-0 sm:ml-4">
+                    <p className="text-xl font-bold tracking-tight text-[#083946] sm:text-2xl">
+                      {item.value}
                     </p>
-                  )}
-
-                  <p className="mt-1 text-[24px] font-black leading-none text-slate-900 lg:text-[22px]">
-                    {item.value}
-                  </p>
-
-                  <p className="mt-2 text-[17px] leading-6 text-slate-500 lg:mt-1 lg:text-[15px] lg:leading-5">
-                    {item.subtitle}
-                  </p>
-
+                    <p className="mt-0.5 text-xs text-slate-600 sm:text-sm">
+                      {item.subtitle}
+                    </p>
+                  </div>
                 </div>
-
-              </div>
-
-            ))}
-
+              );
+            })}
           </div>
-
         </div>
-
       </div>
     </section>
   );
