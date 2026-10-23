@@ -11,13 +11,13 @@ export function Testimonials() {
     },
     {
       name: "Carlos Ramírez",
-      city: "Chía / Sabana",
+      city: "Bogotá",
       photo: "/images/testimonials/paciente2.jpg",
       text: "Excelente servicio para mi hijo con fiebre alta. Evitamos llevarlo a urgencias a la medianoche con riesgo de contagio. Trato pediátrico impecable.",
     },
     {
       name: "Sandra López",
-      city: "Medellín (El Poblado)",
+      city: "Medellín",
       photo: "/images/testimonials/paciente3.jpg",
       text: "Puntualidad y profesionalismo total. Hicieron electrocardiograma en reposo y nos entregaron el reporte interpretado en el momento. Muy recomendados.",
     },
@@ -34,7 +34,7 @@ export function Testimonials() {
             La confianza de nuestros pacientes
           </h2>
           <p className="mx-auto mt-2 text-sm text-slate-500 sm:text-base">
-            Familias en Bogotá, Medellín y Sabana que reciben atención médica con tranquilidad en su hogar.
+            Familias en Bogotá y Medellín que reciben atención médica con tranquilidad en su hogar.
           </p>
         </div>
 

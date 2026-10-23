@@ -17,7 +17,7 @@ export function FAQ() {
     },
     {
       q: "¿En qué sectores de Bogotá y Medellín tienen cobertura?",
-      a: "En Bogotá cubrimos las principales localidades (Usaquén, Suba, Chapinero, Teusaquillo, Kennedy, Engativá, etc.) y municipios cercanos como Chía y Cota. En Medellín atendemos en El Poblado, Laureles, Belén, Envigado, Sabaneta y Bello.",
+      a: "Contamos con cobertura médica directa en Bogotá y Medellín, con profesionales listos para acudir a tu hogar, apartamento u hotel en 45 a 60 minutos.",
     },
     {
       q: "¿Cuánto tiempo demora en llegar el médico?",

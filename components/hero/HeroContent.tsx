@@ -9,14 +9,14 @@ export function HeroContent() {
 
   const cityData = {
     bogota: {
-      label: "Bogotá y Sabana",
-      activeDoctors: "Médicos disponibles en Bogotá (Parque 93, Chicó, Usaquén, Rosales, Suba, Chía)",
+      label: "Bogotá",
+      activeDoctors: "Médicos disponibles en Bogotá",
       eta: "45 a 60 min",
       waText: "Hola AinovaHealth, necesito solicitar un médico a domicilio en Bogotá. Mi nombre es...",
     },
     medellin: {
-      label: "Medellín y Valle de Aburrá",
-      activeDoctors: "Médicos disponibles en Medellín (El Poblado, Provenza, Manila, Laureles, Envigado)",
+      label: "Medellín",
+      activeDoctors: "Médicos disponibles en Medellín",
       eta: "40 a 55 min",
       waText: "Hola AinovaHealth, necesito solicitar un médico a domicilio en Medellín. Mi nombre es...",
     },
@@ -52,7 +52,7 @@ export function HeroContent() {
           }`}
         >
           <MapPin className="h-3.5 w-3.5 text-[#16A34A]" />
-          <span>Bogotá y Sabana</span>
+          <span>Bogotá</span>
         </button>
 
         <button
@@ -65,7 +65,7 @@ export function HeroContent() {
           }`}
         >
           <MapPin className="h-3.5 w-3.5 text-[#16A34A]" />
-          <span>Medellín y Aburrá</span>
+          <span>Medellín</span>
         </button>
       </div>
 

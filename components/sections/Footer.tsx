@@ -100,9 +100,8 @@ export function Footer() {
               </div>
 
               <ul className="mt-4 space-y-2 text-xs text-slate-300">
-                <li>• <strong>Bogotá D.C.:</strong> Cobertura norte, centro, occidente y sur.</li>
-                <li>• <strong>Sabana Norte:</strong> Chía, Cota, Cajicá, Zipaquirá.</li>
-                <li>• <strong>Medellín:</strong> Valle de Aburrá, Poblado, Laureles, Envigado.</li>
+                <li>• <strong>Bogotá:</strong> Cobertura urbana en toda la ciudad.</li>
+                <li>• <strong>Medellín:</strong> Cobertura urbana en toda la ciudad.</li>
               </ul>
             </div>
           </div>
