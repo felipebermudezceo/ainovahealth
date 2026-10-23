@@ -12,7 +12,7 @@ export function FooterInfo() {
             </div>
             <div>
               <p className="text-base font-bold text-[#083946]">Cobertura Urbana</p>
-              <p className="text-xs text-slate-500">Bogotá y Medellín</p>
+              <p className="text-xs text-slate-500">Bogotá, Medellín y Sabana</p>
             </div>
           </div>
 
