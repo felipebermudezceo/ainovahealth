@@ -16,6 +16,12 @@ export function FloatingWhatsapp() {
     if (pathname.includes("electrocardiograma")) {
       return "Hola AinovaHealth, requiero agendar un Electrocardiograma a domicilio. Mi nombre es...";
     }
+    if (pathname.includes("sueroterapia")) {
+      return "Hola AinovaHealth, deseo agendar una valoración médica y Sueroterapia a domicilio. Mi nombre es...";
+    }
+    if (pathname.includes("ets")) {
+      return "Hola AinovaHealth, solicito información confidencial para toma de exámenes de ETS a domicilio. Mi nombre es...";
+    }
     if (pathname.includes("laboratorios")) {
       return "Hola AinovaHealth, requiero cotizar y agendar exámenes de Laboratorio Clínico a domicilio. Mi nombre es...";
     }
