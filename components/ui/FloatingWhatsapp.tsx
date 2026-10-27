@@ -41,32 +41,49 @@ export function FloatingWhatsapp() {
   return (
     <aside
       aria-label="Canales directos de atención médica"
-      className="fixed bottom-4 right-4 z-[999] flex items-center gap-2 sm:bottom-6 sm:right-6"
+      className="fixed bottom-4 right-3 z-[999] flex flex-col items-end gap-2 sm:bottom-6 sm:right-6"
     >
-      {/* Botón Llamada Directa */}
-      <a
-        href="tel:+573007239175"
-        onClick={() => handleTrackClick("call")}
-        id="btn-floating-call"
-        aria-label="Llamar directamente al médico"
-        className="flex items-center gap-2 rounded-full border border-slate-700/40 bg-[#083946] px-3.5 py-2.5 text-white shadow-lg transition hover:bg-[#062933]"
-      >
-        <FaPhoneAlt className="text-xs text-emerald-300" />
-        <span className="text-xs font-bold">Llamar Ahora</span>
-      </a>
-
-      {/* Botón WhatsApp Médico */}
+      {/* Botón WhatsApp Médico Principal (Agrandado y con pulso de atención) */}
       <a
         href={waUrl}
         onClick={() => handleTrackClick("whatsapp")}
         id="btn-floating-whatsapp"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chatear por WhatsApp con el equipo médico"
-        className="flex items-center gap-2 rounded-full bg-[#16A34A] px-4 py-2.5 text-white shadow-lg transition hover:bg-[#15803D]"
+        aria-label="Chatear por WhatsApp con el médico a domicilio"
+        className="group relative flex items-center gap-3 rounded-full bg-[#16A34A] px-5 py-3.5 text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-[#15803D] hover:shadow-emerald-500/50 active:scale-95 sm:px-6 sm:py-4"
+        style={{
+          boxShadow: "0 10px 25px -3px rgba(22, 163, 74, 0.4), 0 4px 6px -4px rgba(22, 163, 74, 0.3)",
+        }}
       >
-        <FaWhatsapp className="text-lg text-white" />
-        <span className="text-xs font-bold sm:text-sm">WhatsApp Médico</span>
+        {/* Indicador pulsante de disponibilidad */}
+        <span className="relative flex h-3 w-3">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-200 opacity-75"></span>
+          <span className="relative inline-flex h-3 w-3 rounded-full bg-white"></span>
+        </span>
+
+        <FaWhatsapp className="text-2xl text-white transition-transform duration-300 group-hover:rotate-12 sm:text-3xl" />
+        
+        <div className="flex flex-col text-left leading-tight">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-emerald-100 sm:text-xs">
+            Médico en Casa 24/7
+          </span>
+          <span className="text-sm font-extrabold sm:text-base">
+            Pedir por WhatsApp
+          </span>
+        </div>
+      </a>
+
+      {/* Botón Secundario Llamada Directa */}
+      <a
+        href="tel:+573007239175"
+        onClick={() => handleTrackClick("call")}
+        id="btn-floating-call"
+        aria-label="Llamar directamente al médico particular"
+        className="flex items-center gap-2 rounded-full border border-slate-700/30 bg-[#083946]/95 px-3 py-1.5 text-white shadow-md backdrop-blur-sm transition-all duration-200 hover:bg-[#062933] hover:scale-102"
+      >
+        <FaPhoneAlt className="text-[11px] text-emerald-400" />
+        <span className="text-[11px] font-semibold text-slate-100">Llamada Médica Particular</span>
       </a>
     </aside>
   );

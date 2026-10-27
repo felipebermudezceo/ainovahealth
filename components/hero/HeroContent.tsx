@@ -118,22 +118,27 @@ export function HeroContent() {
           rel="noopener noreferrer"
           onClick={() => handleTrackClick("whatsapp")}
           id="hero-btn-whatsapp"
-          className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#16A34A] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#15803D]"
+          className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#16A34A] px-7 py-4 text-base font-bold text-white shadow-lg transition hover:scale-102 hover:bg-[#15803D]"
         >
-          <FaWhatsapp className="text-xl" />
-          <span>Solicitar médico en {selectedCity === "bogota" ? "Bogotá" : "Medellín"}</span>
+          <FaWhatsapp className="text-2xl" />
+          <span>Pedir Médico por WhatsApp ({selectedCity === "bogota" ? "Bogotá" : "Medellín"})</span>
         </a>
 
         <a
           href="tel:+573007239175"
           onClick={() => handleTrackClick("call")}
           id="hero-btn-call"
-          className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-semibold text-[#083946] shadow-2xs transition hover:bg-slate-50 hover:border-slate-400"
+          className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white/90 px-4 py-3 text-xs font-semibold text-[#083946] shadow-sm transition hover:bg-slate-50"
         >
           <FaPhoneAlt className="text-xs text-[#16A34A]" />
-          <span>Llamar al 300 723 9175</span>
+          <span>Llamada Particular: 300 723 9175</span>
         </a>
       </div>
+
+      {/* Aviso de filtro para frenar usuarios de EPS y Prepagadas */}
+      <p className="mt-3 text-xs font-medium text-slate-500">
+        🩺 Consulta médica particular en casa 24/7 • Pago por servicio privado (No afiliados a EPS ni Prepagadas).
+      </p>
     </div>
   );
 }
