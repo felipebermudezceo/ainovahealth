@@ -110,8 +110,15 @@ export function HeroContent() {
         </div>
       </div>
 
+      {/* Badge de Tarifa Transparente para Derribar Fricción */}
+      <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50/80 px-3.5 py-1.5 text-xs font-medium text-emerald-900 shadow-2xs">
+        <span className="flex h-2 w-2 rounded-full bg-[#16A34A]" />
+        <span className="font-bold text-[#16A34A]">Tarifa transparente:</span>
+        <span>Consulta médica particular en casa desde $140.000 COP</span>
+      </div>
+
       {/* Acciones Directas de Contacto */}
-      <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+      <div className="mt-6 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
         <a
           href={`https://wa.me/573007239175?text=${encodeURIComponent(current.waText)}`}
           target="_blank"
@@ -137,7 +144,7 @@ export function HeroContent() {
 
       {/* Aviso de filtro para frenar usuarios de EPS y Prepagadas */}
       <p className="mt-3 text-xs font-medium text-slate-500">
-        🩺 Consulta médica particular en casa 24/7 • Atención privada sin convenios de EPS ni medicina prepagada.
+        🩺 Consulta médica particular en casa 24/7 • Atención privada sin contratos mensuales ni copagos de EPS.
       </p>
     </div>
   );
