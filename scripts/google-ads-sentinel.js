@@ -20,7 +20,8 @@ const CONFIG = {
   
   // Destinatarios de los informes en tiempo real y alertas
   NOTIFICATION_EMAILS: [
-    'darataz0402@gmail.com', // Ing. Viviana Yury
+    'darataz0402@gmail.com',  // Ing. Viviana Yury
+    'riverotaymi@gmail.com',  // Dr. Adnier / Dirección AinovaHealth
   ],
 
   // Si está en true, envía el reporte en cada ejecución. Si está en false, solo si hay alertas.
