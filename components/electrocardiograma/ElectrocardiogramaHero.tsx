@@ -3,6 +3,7 @@
 import { FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { trackLeadClick } from "@/lib/analytics/track";
 
 export function ElectrocardiogramaHero() {
   return (
@@ -46,7 +47,7 @@ export function ElectrocardiogramaHero() {
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#25D366]" />
                 </span>
                 <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#0A3D49] lg:text-xs lg:tracking-[0.18em]">
-                  Atención a domicilio
+                  Atención particular en Bogotá y Medellín
                 </span>
               </div>
             </div>
@@ -83,8 +84,7 @@ export function ElectrocardiogramaHero() {
 
             {/* Descripción */}
             <p className="mx-auto mt-4 max-w-[440px] text-[15px] leading-relaxed text-slate-600 sm:text-[16px] lg:mx-0 lg:mt-6 lg:max-w-[500px] lg:text-[18px]">
-              Realiza tu electrocardiograma sin salir de casa, con atención
-              profesional y resultados confiables.
+              Realiza tu electrocardiograma de 12 derivaciones sin salir de casa, con valoración médica profesional y entrega inmediata de resultados.
             </p>
 
             {/* CTA */}
@@ -92,9 +92,16 @@ export function ElectrocardiogramaHero() {
               <div className="pointer-events-none absolute inset-0 rounded-full bg-[#25D366]/30 blur-2xl" />
 
               <motion.a
-                href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20Quisiera%20Agendar%20Una%20Cita%2C%20Mi%20nombre%20es..."
+                href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20requiero%20agendar%20un%20Electrocardiograma%20particular%20a%20domicilio.%20Mi%20nombre%20es..."
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackLeadClick({
+                    type: "whatsapp",
+                    location: "ecg_hero",
+                    service: "electrocardiograma",
+                  })
+                }
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 className="relative flex w-full items-center justify-center gap-3 rounded-full border border-[#B9FFD0] bg-gradient-to-b from-[#31DD6E] to-[#19B858] px-7 py-3.5 text-white shadow-[0_18px_45px_rgba(37,211,102,.28)] lg:inline-flex lg:w-auto lg:px-8 lg:py-4"

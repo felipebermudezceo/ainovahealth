@@ -1,4 +1,7 @@
+"use client";
+
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
+import { trackLeadClick } from "@/lib/analytics/track";
 
 export function CTA() {
   return (
@@ -17,9 +20,16 @@ export function CTA() {
 
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
-                href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20requiero%20atenci%C3%B3n%20m%C3%A9dica%20a%20domicilio.%20Mi%20nombre%20es..."
+                href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20requiero%20atenci%C3%B3n%20m%C3%A9dica%20particular%20a%20domicilio.%20Mi%20nombre%20es..."
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackLeadClick({
+                    type: "whatsapp",
+                    location: "cta_banner",
+                    service: "medicina_general",
+                  })
+                }
                 className="flex items-center justify-center gap-3 rounded-xl bg-[#22C55E] px-6 py-3.5 font-bold text-white shadow-sm transition hover:bg-[#16A34A]"
               >
                 <FaWhatsapp className="text-2xl" />
@@ -31,6 +41,13 @@ export function CTA() {
 
               <a
                 href="tel:+573007239175"
+                onClick={() =>
+                  trackLeadClick({
+                    type: "call",
+                    location: "cta_banner",
+                    service: "medicina_general",
+                  })
+                }
                 className="flex items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-white/10 px-5 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20"
               >
                 <FaPhoneAlt className="text-sm text-emerald-300" />

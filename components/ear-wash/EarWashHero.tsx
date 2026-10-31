@@ -3,6 +3,7 @@
 import { FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { trackLeadClick } from "@/lib/analytics/track";
 
 export function EarWashHero() {
   return (
@@ -27,7 +28,7 @@ export function EarWashHero() {
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#25D366]" />
                 </span>
                 <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#0A3D49] lg:text-xs lg:tracking-[0.18em]">
-                  Atención a domicilio
+                  Atención particular en Bogotá y Medellín
                 </span>
               </div>
             </div>
@@ -58,7 +59,7 @@ export function EarWashHero() {
 
             {/* Descripción */}
             <p className="mx-auto mt-4 max-w-[420px] text-[16px] leading-relaxed text-slate-600 lg:mx-0 lg:mt-6 lg:max-w-[480px] lg:text-[18px]">
-              Atención profesional en la comodidad de tu hogar.
+              Otoscopia y extracción segura de tapón de cerumen en la comodidad de tu hogar. Atención médica particular sin filas.
             </p>
 
             {/* CTA */}
@@ -66,9 +67,16 @@ export function EarWashHero() {
               <div className="pointer-events-none absolute inset-0 rounded-full bg-[#25D366]/30 blur-2xl" />
 
               <motion.a
-                href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20Quisiera%20Agendar%20Una%20Cita%2C%20Mi%20nombre%20es..."
+                href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20requiero%20informaci%C3%B3n%20y%20agendar%20un%20Lavado%20de%20O%C3%ADdos%20particular%20a%20domicilio.%20Mi%20nombre%20es..."
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackLeadClick({
+                    type: "whatsapp",
+                    location: "ear_wash_hero",
+                    service: "lavado_oidos",
+                  })
+                }
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 className="relative flex w-full items-center justify-center gap-3 rounded-full border border-[#B9FFD0] bg-gradient-to-b from-[#31DD6E] to-[#19B858] px-7 py-3.5 text-white shadow-[0_18px_45px_rgba(37,211,102,.28)] lg:inline-flex lg:w-auto lg:px-8 lg:py-4"

@@ -13,6 +13,7 @@ import {
   MessageCircle,
   ArrowRight,
 } from "lucide-react";
+import { trackLeadClick } from "@/lib/analytics/track";
 
 export function Conditions() {
   const items = [
@@ -51,18 +52,14 @@ export function Conditions() {
   ];
 
   return (
-    <section
-      id="servicios"
-      className="py-16 px-4"
-    >
+    <section id="servicios" className="py-16 px-4">
       <div className="mx-auto max-w-[1280px]">
-
         <h2 className="text-center text-3xl sm:text-4xl font-semibold tracking-tight text-[#083946]">
           ¿Qué atendemos?
         </h2>
 
         <p className="mt-2 text-center text-slate-600 text-sm sm:text-base">
-          Atención médica particular a domicilio para niños, adultos y adultos mayores
+          Atención médica particular a domicilio para niños, adultos y adultos mayores en Bogotá y Medellín
         </p>
 
         <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-[#16A34A]" />
@@ -75,10 +72,17 @@ export function Conditions() {
               <a
                 key={item.title}
                 href={`https://wa.me/573007239175?text=${encodeURIComponent(
-                  `Hola AinovaHealth, quisiera consultar y solicitar atención a domicilio para: ${item.title}. Mi nombre es...`
+                  `Hola AinovaHealth, quisiera consultar y solicitar atención particular a domicilio para: ${item.title}. Mi nombre es...`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackLeadClick({
+                    type: "whatsapp",
+                    location: "conditions_grid",
+                    service: item.title,
+                  })
+                }
                 className="group"
               >
                 <motion.div
@@ -93,45 +97,11 @@ export function Conditions() {
                     y: -8,
                     scale: 1.03,
                   }}
-                  className="
-                    flex
-                    min-h-[215px]
-                    flex-col
-                    items-center
-                    justify-between
-                    rounded-3xl
-                    border
-                    border-slate-200
-                    bg-white
-                    px-5
-                    py-6
-                    text-center
-                    shadow-sm
-                    transition-all
-                    duration-300
-                    cursor-pointer
-                    group-hover:border-[#22C55E]
-                    group-hover:bg-[#F7FFF9]
-                    group-hover:shadow-[0_25px_45px_rgba(34,197,94,.22)]
-                  "
+                  className="flex min-h-[215px] flex-col items-center justify-between rounded-3xl border border-slate-200 bg-white px-5 py-6 text-center shadow-sm transition-all duration-300 cursor-pointer group-hover:border-[#22C55E] group-hover:bg-[#F7FFF9] group-hover:shadow-[0_25px_45px_rgba(34,197,94,.22)]"
                 >
-
                   {/* ICONO */}
-
                   <motion.div
-                    className="
-                      mb-2
-                      flex
-                      h-16
-                      w-16
-                      items-center
-                      justify-center
-                      rounded-full
-                      bg-[#ECFDF5]
-                      transition-all
-                      duration-300
-                      group-hover:bg-[#22C55E]
-                    "
+                    className="mb-2 flex h-16 w-16 items-center justify-center rounded-full bg-[#ECFDF5] transition-all duration-300 group-hover:bg-[#22C55E]"
                     animate={{
                       y: [0, -5, 0],
                     }}
@@ -149,67 +119,26 @@ export function Conditions() {
                     <Icon
                       size={34}
                       strokeWidth={2.2}
-                      className="
-                        text-[#22C55E]
-                        transition-all
-                        duration-300
-                        group-hover:text-white
-                      "
+                      className="text-[#22C55E] transition-all duration-300 group-hover:text-white"
                     />
                   </motion.div>
 
                   {/* TITULO */}
-
-                  <p
-                    className="
-                      text-[15px]
-                      lg:text-[13px]
-                      font-semibold
-                      leading-6
-                      text-slate-700
-                      transition-colors
-                      duration-300
-                      group-hover:text-[#15803D]
-                    "
-                  >
+                  <p className="text-[15px] lg:text-[13px] font-semibold leading-6 text-slate-700 transition-colors duration-300 group-hover:text-[#15803D]">
                     {item.title}
                   </p>
 
-                  {/* BOTÓN */}
-
-                  <div
-                    className="
-                      mt-4
-                      flex
-                      items-center
-                      gap-1
-                      rounded-full
-                      bg-[#ECFDF5]
-                      px-3
-                      py-1.5
-                      text-[12px]
-                      font-semibold
-                      text-[#16A34A]
-                      opacity-0
-                      translate-y-2
-                      transition-all
-                      duration-300
-                      group-hover:translate-y-0
-                      group-hover:opacity-100
-                    "
-                  >
+                  {/* BOTÓN (Visible siempre en móvil para facilitar toque inmediato) */}
+                  <div className="mt-4 flex items-center gap-1 rounded-full bg-[#ECFDF5] px-3 py-1.5 text-[12px] font-semibold text-[#16A34A] opacity-100 lg:opacity-0 lg:translate-y-2 transition-all duration-300 lg:group-hover:translate-y-0 lg:group-hover:opacity-100">
                     <MessageCircle size={14} />
-                    <span>Consultar</span>
+                    <span>Pedir</span>
                     <ArrowRight size={13} />
                   </div>
-
                 </motion.div>
               </a>
             );
           })}
-
         </div>
-
       </div>
     </section>
   );

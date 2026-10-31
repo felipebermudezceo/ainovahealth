@@ -6,13 +6,14 @@ import { usePathname } from "next/navigation";
 import { Menu, X, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import { trackLeadClick } from "@/lib/analytics/track";
 
 const menu = [
   { name: "Inicio", href: "/" },
-  { name: "Servicios", href: "#servicios" },
-  { name: "¿Cómo Funciona?", href: "#como-funciona" },
-  { name: "Particular vs EPS", href: "#particular" },
-  { name: "Preguntas", href: "#preguntas-frecuentes" },
+  { name: "Servicios", href: "/#servicios" },
+  { name: "¿Cómo Funciona?", href: "/#como-funciona" },
+  { name: "Particular vs EPS", href: "/#particular" },
+  { name: "Preguntas", href: "/#preguntas-frecuentes" },
 ];
 
 export function Navbar() {
@@ -27,6 +28,13 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const resolveHref = (href: string) => {
+    if (pathname === "/" && href.startsWith("/#")) {
+      return href.slice(1);
+    }
+    return href;
+  };
 
   return (
     <>
@@ -57,7 +65,7 @@ export function Navbar() {
               {menu.map((item) => (
                 <li key={item.name}>
                   <a
-                    href={item.href}
+                    href={resolveHref(item.href)}
                     className="text-sm font-medium text-slate-700 transition hover:text-[#16A34A]"
                   >
                     {item.name}
@@ -67,10 +75,16 @@ export function Navbar() {
             </ul>
           </nav>
 
-          {/* Acciones de Contacto Inmediato */}
+          {/* Acciones de Contacto Inmediato (Desktop) */}
           <div className="hidden items-center gap-3 md:flex">
             <a
               href="tel:+573007239175"
+              onClick={() =>
+                trackLeadClick({
+                  type: "call",
+                  location: "navbar_desktop",
+                })
+              }
               className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50/80 px-3.5 py-2 text-xs font-semibold text-[#083946] transition hover:bg-slate-100"
             >
               <Phone className="h-3.5 w-3.5 text-[#16A34A]" />
@@ -81,6 +95,12 @@ export function Navbar() {
               href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20requiero%20solicitar%20un%20m%C3%A9dico%20particular%20a%20domicilio."
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackLeadClick({
+                  type: "whatsapp",
+                  location: "navbar_desktop",
+                })
+              }
               className="inline-flex items-center gap-2 rounded-lg bg-[#16A34A] px-4 py-2 text-xs font-semibold text-white shadow-xs transition hover:bg-[#15803D] hover:shadow-sm"
             >
               <FaWhatsapp className="text-base" />
@@ -88,11 +108,34 @@ export function Navbar() {
             </a>
           </div>
 
-          {/* Menú Móvil */}
+          {/* Menú Móvil con acceso directo a WhatsApp y Llamada */}
           <div className="flex items-center gap-2 lg:hidden">
             <a
+              href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20requiero%20solicitar%20un%20m%C3%A9dico%20particular%20a%20domicilio."
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                trackLeadClick({
+                  type: "whatsapp",
+                  location: "navbar_mobile",
+                })
+              }
+              className="inline-flex items-center gap-1.5 rounded-lg bg-[#16A34A] px-2.5 py-2 text-xs font-bold text-white shadow-2xs md:hidden"
+              aria-label="Solicitar médico por WhatsApp"
+            >
+              <FaWhatsapp className="text-sm" />
+              <span>WhatsApp</span>
+            </a>
+
+            <a
               href="tel:+573007239175"
-              className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-[#083946]"
+              onClick={() =>
+                trackLeadClick({
+                  type: "call",
+                  location: "navbar_mobile",
+                })
+              }
+              className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-[#083946] md:hidden"
               aria-label="Llamar directamente al médico"
             >
               <Phone className="h-4 w-4 text-[#16A34A]" />
@@ -115,7 +158,7 @@ export function Navbar() {
               {menu.map((item) => (
                 <li key={item.name}>
                   <a
-                    href={item.href}
+                    href={resolveHref(item.href)}
                     onClick={() => setOpen(false)}
                     className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-800 hover:bg-emerald-50 hover:text-[#16A34A]"
                   >
@@ -130,6 +173,13 @@ export function Navbar() {
                 href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20requiero%20solicitar%20un%20m%C3%A9dico%20particular%20a%20domicilio."
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  trackLeadClick({
+                    type: "whatsapp",
+                    location: "navbar_mobile_menu",
+                  });
+                  setOpen(false);
+                }}
                 className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#16A34A] py-2.5 text-xs font-semibold text-white shadow-xs"
               >
                 <FaWhatsapp className="text-base" />

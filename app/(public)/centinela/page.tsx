@@ -1,38 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { 
   ShieldCheck, 
   AlertTriangle, 
   CheckCircle2, 
-  XCircle, 
   Activity, 
-  PhoneCall, 
   Copy, 
   Check, 
-  ExternalLink,
-  RefreshCw,
   Zap,
   Lock
 } from "lucide-react";
-import { FaWhatsapp, FaGoogle } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function CentinelaDashboard() {
-  const [copiedScript, setCopiedScript] = useState(false);
   const [copiedMsg, setCopiedMsg] = useState(false);
 
-  const copyScriptText = () => {
-    navigator.clipboard.writeText(`// Copia el contenido del archivo ainovahealth/scripts/google-ads-sentinel.js en Google Ads > Herramientas > Secuencias de comandos`);
-    setCopiedScript(true);
-    setTimeout(() => setCopiedScript(false), 2500);
-  };
+  const doctorMessage = `Hola Dr. Adnier, hemos completado la auditoría forense y reparación técnica de las campañas y la plataforma web (Corte 31 de Octubre):
 
-  const doctorMessage = `Hola doctor, ya quedó solucionada la causa raíz de las llamadas:
-1. Bloqueamos Emermédica y prepagadas como términos negativos.
-2. Pausamos el botón de llamada directa en Google para que no llamen pensando que es la clínica.
-3. El botón de WhatsApp en la web quedó más grande y con animación de atención inmediata 24/7.
-4. El sistema centinela en tiempo real quedó activado para auditar cada hora el tráfico y alertarnos de cualquier anomalía.`;
+1. Corrección de Fuga en Medellín: La portada principal ahora detecta automáticamente la ciudad del anuncio y muestra simultáneamente "Bogotá y Medellín" para que ningún paciente de Medellín rebote pensando que solo atendemos en Bogotá.
+2. Rastreo Total de Conversiones (GTM): Se instrumentaron el 100% de los botones de WhatsApp y Llamada en toda la web y en las 6 páginas de especialidades (Sueroterapia, Pediatría, Lavado de Oídos, ECG, Laboratorios y ETS) para enviar la señal de conversión al algoritmo de Google Ads.
+3. Centinela Forense v3.0 (Ayer + Hoy): El script de monitoreo ahora audita comparativamente el cierre de AYER y el tráfico en vivo de HOY, alertando si hay parálisis por saldo prepago o términos de búsqueda no deseados.`;
 
   const copyDoctorMessage = () => {
     navigator.clipboard.writeText(doctorMessage);
@@ -48,13 +36,13 @@ export default function CentinelaDashboard() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald-300">
-                <Activity className="h-3.5 w-3.5 animate-pulse" /> Monitor Centinela 24/7 en Vivo
+                <Activity className="h-3.5 w-3.5 animate-pulse" /> Monitor Centinela v3.0 en Vivo
               </span>
               <h1 className="mt-2 text-2xl font-extrabold sm:text-3xl">
-                Centro de Mando & Auditoría de Tráfico
+                Centro de Mando & Auditoría de Tráfico (Ayer + Hoy)
               </h1>
               <p className="mt-1 text-sm text-slate-200">
-                Supervisión técnica de Google Ads, Clixtell Anti-Fraude, Web CRO y Alertas en Tiempo Real.
+                Supervisión técnica de Google Ads, Clixtell Anti-Fraude, Web CRO Multi-Ciudad y Alertas en Tiempo Real.
               </p>
             </div>
             <div className="rounded-xl bg-white/10 p-4 backdrop-blur-md text-right">
@@ -65,26 +53,29 @@ export default function CentinelaDashboard() {
           </div>
         </header>
 
-        {/* 1. Diagnóstico de Alerta Máxima: La Causa de las Llamadas de Emermédica */}
-        <section className="mt-8 rounded-2xl border border-red-200 bg-red-50/80 p-6 shadow-sm">
+        {/* 1. Diagnóstico Forense de Cero Pacientes Ayer */}
+        <section className="mt-8 rounded-2xl border border-amber-200 bg-amber-50/80 p-6 shadow-sm">
           <div className="flex items-start gap-3">
-            <AlertTriangle className="h-6 w-6 text-red-600 shrink-0 mt-0.5" />
+            <AlertTriangle className="h-6 w-6 text-amber-600 shrink-0 mt-0.5" />
             <div className="space-y-2">
-              <h2 className="text-lg font-bold text-red-900">
-                Causa Raíz Diagnosticada: ¿Por qué entraron llamadas equivocadas de Emermédica?
+              <h2 className="text-lg font-bold text-amber-950">
+                Diagnóstico de Auditoría: ¿Por qué ayer no entraron pacientes y qué se reparó hoy?
               </h2>
-              <p className="text-sm text-red-800 leading-relaxed">
-                El usuario que buscó <strong>&quot;Emermédica teléfono&quot;</strong> en su celular vio el anuncio de Google Ads con el <strong>botón directo de llamada (Call Asset)</strong>. Al tocarlo, marcó directamente al 300 723 9175 <strong>sin ingresar a la página web</strong>, creyendo que era la central de urgencias de su prepagada. Por esa razón entraban llamadas y cero mensajes a WhatsApp.
+              <p className="text-sm text-amber-900 leading-relaxed">
+                Se detectaron y corrigieron <strong>3 cuellos de botella técnicos</strong> que afectaban la conversión tras pausar la extensión de llamada el 27 de octubre:
+                (1) La portada mostraba por defecto <strong>&quot;Bogotá&quot;</strong> a los visitantes de Medellín;
+                (2) El 85% de los botones secundarios no disparaban eventos <code>whatsapp_click</code> al algoritmo de Google Ads; y
+                (3) El saldo prepago de la cuenta requiere verificación en Facturación tras los consumos acumulados de la semana.
               </p>
               <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold">
-                <span className="rounded-md bg-red-200/80 px-2.5 py-1 text-red-900">
-                  Acción 1: Pausar Recurso de Llamada en Google Ads
-                </span>
-                <span className="rounded-md bg-red-200/80 px-2.5 py-1 text-red-900">
-                  Acción 2: Agregar &quot;emermedica&quot; y &quot;clinica&quot; a Negativas
+                <span className="rounded-md bg-emerald-700 px-2.5 py-1 text-white">
+                  Reparado 1: Portada Dual Bogotá y Medellín + Auto-Detección UTM ✓
                 </span>
                 <span className="rounded-md bg-emerald-700 px-2.5 py-1 text-white">
-                  Acción 3 Web: Botón WhatsApp Agrandado y Filtro Activado ✓
+                  Reparado 2: Tracking GTM en 100% de Botones y 6 Sub-Landings ✓
+                </span>
+                <span className="rounded-md bg-emerald-700 px-2.5 py-1 text-white">
+                  Reparado 3: Centinela v3.0 Audita AYER + HOY ✓
                 </span>
               </div>
             </div>
@@ -95,7 +86,7 @@ export default function CentinelaDashboard() {
         <section className="mt-8">
           <h2 className="text-xl font-bold text-[#083946] flex items-center gap-2">
             <ShieldCheck className="h-6 w-6 text-emerald-600" />
-            Estado de Blindaje del Ecosistema
+            Estado de Blindaje y Conversión del Ecosistema
           </h2>
 
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -110,28 +101,28 @@ export default function CentinelaDashboard() {
                 </span>
               </div>
               <h3 className="mt-2 text-base font-bold text-slate-900">
-                Next.js Edge Middleware
+                Next.js 16 Proxy Shield (<code>proxy.ts</code>)
               </h3>
               <p className="mt-1 text-xs text-slate-600">
-                Archivo <code>middleware.ts</code> activo. Bloquea scrapers automatizados (Puppeteer, Selenium, cURL) y rechaza ataques por repetición de IPs.
+                Protección perimetral activa. Bloquea scrapers automatizados (Puppeteer, Selenium, cURL) y rechaza ataques de clic por repetición de IPs.
               </p>
             </div>
 
-            {/* Tarjeta 2: Botón WhatsApp Hero & Flotante */}
+            {/* Tarjeta 2: Embudo Multi-Ciudad & GTM */}
             <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
                   Embudo de Conversión CRO
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-800">
-                  <CheckCircle2 className="h-3.5 w-3.5" /> Agrandado & Pulso
+                  <CheckCircle2 className="h-3.5 w-3.5" /> Bogotá & Medellín + GTM
                 </span>
               </div>
               <h3 className="mt-2 text-base font-bold text-slate-900">
-                WhatsApp Médico 24/7
+                Portada Inteligente & Tracking 100%
               </h3>
               <p className="mt-1 text-xs text-slate-600">
-                Botón flotante con microanimación neón y aviso de servicio particular. El canal telefónico fue subordinado para evitar llamadas accidentales.
+                Muestra simultáneamente Bogotá y Medellín o autoselecciona la ciudad según el anuncio. Todos los botones envían <code>whatsapp_click</code> y <code>call_click</code> con valor $140.000 COP a GTM.
               </p>
             </div>
 
@@ -142,42 +133,42 @@ export default function CentinelaDashboard() {
                   Ciberseguridad Anti-Fraude
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-800">
-                  <AlertTriangle className="h-3.5 w-3.5" /> Requiere Link de API
+                  <AlertTriangle className="h-3.5 w-3.5" /> Verificar Link API
                 </span>
               </div>
               <h3 className="mt-2 text-base font-bold text-slate-900">
                 Clixtell Platform (Plan Agency)
               </h3>
               <p className="mt-1 text-xs text-slate-600">
-                El script <code>track.js</code> está inyectado en el frontend. En el panel de Clixtell se debe hacer clic en <strong>Link New Account</strong> para enlazar el ID <code>845-192-8504</code> y habilitar el bloqueo automático de IPs vía API.
+                El script <code>track.js</code> está activo en todas las páginas públicas. Verificar en Clixtell &gt; Integrations &gt; Google Ads que el ID <code>845-192-8504</code> esté enlazado.
               </p>
             </div>
 
-            {/* Tarjeta 4: Google Ads Sentinel Script */}
+            {/* Tarjeta 4: Google Ads Sentinel Script v3.0 */}
             <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
                   Robot en la Nube
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-800">
-                  <Zap className="h-3.5 w-3.5" /> Reportes en Vivo
+                  <Zap className="h-3.5 w-3.5" /> v3.0 (Ayer + Hoy)
                 </span>
               </div>
               <h3 className="mt-2 text-base font-bold text-slate-900">
-                Google Ads Sentinel v2.0
+                Google Ads Sentinel v3.0
               </h3>
               <p className="mt-1 text-xs text-slate-600">
-                Actualizado en <code>google-ads-sentinel.js</code> con envío obligatorio de correos cada hora con métricas reales y rastreo automático de términos de fuga.
+                Actualizado en <code>google-ads-sentinel.js</code> para auditar comparativamente <code>YESTERDAY</code> y <code>TODAY</code>, listando términos de búsqueda exactos y alertas de saldo/conversión.
               </p>
             </div>
           </div>
         </section>
 
-        {/* 3. Guía de Ejecución Rápida */}
+        {/* 3. Guía de Verificación en Google Ads */}
         <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <h2 className="text-lg font-bold text-[#083946] flex items-center gap-2">
             <Lock className="h-5 w-5 text-emerald-600" />
-            Acciones Clave para Viviana en las Plataformas
+            Checklist de Verificación en Consola Google Ads (845-192-8504)
           </h2>
 
           <div className="mt-5 space-y-4">
@@ -188,10 +179,10 @@ export default function CentinelaDashboard() {
               </span>
               <div className="flex-1">
                 <h4 className="text-sm font-bold text-slate-900">
-                  Pausar el Recurso de Llamada en Google Ads
+                  Verificar Saldo Prepago en Facturación &gt; Resumen
                 </h4>
                 <p className="text-xs text-slate-600 mt-0.5">
-                  Google Ads &gt; Anuncios y recursos &gt; Recursos &gt; Filtra por Llamadas &gt; Pausar teléfono <code>3007239175</code>. Esto canaliza el 100% de los pacientes a la landing page y a WhatsApp.
+                  Confirmar que la cuenta tenga saldo disponible mayor a <code>$100.000 COP</code> para cubrir la jornada de fin de semana (Sábado y Domingo son los días de mayor demanda domiciliaria).
                 </p>
               </div>
             </div>
@@ -203,10 +194,10 @@ export default function CentinelaDashboard() {
               </span>
               <div className="flex-1">
                 <h4 className="text-sm font-bold text-slate-900">
-                  Pegar el nuevo Script Centinela en Google Ads
+                  Actualizar el Script Centinela v3.0 en Google Ads
                 </h4>
                 <p className="text-xs text-slate-600 mt-0.5">
-                  Google Ads &gt; Herramientas &gt; Secuencias de comandos &gt; Pega el código de <code>google-ads-sentinel.js</code> y programa la frecuencia cada 1 hora. Te enviará siempre un correo con las impresiones, clics y saldo real.
+                  En Google Ads &gt; Herramientas &gt; Secuencias de comandos, pegar la nueva versión de <code>ainovahealth/scripts/google-ads-sentinel.js</code> y pulsar <strong>Ejecutar</strong> para recibir al instante en tu correo la tabla forense de <strong>AYER (YESTERDAY) vs. HOY (TODAY)</strong>.
                 </p>
               </div>
             </div>
@@ -218,10 +209,10 @@ export default function CentinelaDashboard() {
               </span>
               <div className="flex-1">
                 <h4 className="text-sm font-bold text-slate-900">
-                  Completar la vinculación en Clixtell
+                  Marcar Clic en WhatsApp (<code>whatsapp_click</code>) como Conversión Principal
                 </h4>
                 <p className="text-xs text-slate-600 mt-0.5">
-                  Ingresa a Clixtell &gt; Integrations &gt; Google Ads. Al lado de <code>ainovahealth.com</code> pulsa <strong>Link New Account</strong> e inicia sesión con el correo que tiene acceso al ID <code>845-192-8504</code> para que pase de ❌ a ✔.
+                  En Google Ads &gt; Objetivos &gt; Conversiones &gt; Resumen, asegurar que la acción de clic a WhatsApp desde la web esté como <strong>Principal</strong>, ya que la extensión de llamada directa en el buscador fue pausada.
                 </p>
               </div>
             </div>
@@ -232,7 +223,7 @@ export default function CentinelaDashboard() {
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
                 <FaWhatsapp className="text-emerald-600 text-sm" />
-                Mensaje listo para reenviar a Dr. Adnier por WhatsApp:
+                Reporte de estatus listo para enviar al Dr. Adnier:
               </span>
               <button
                 onClick={copyDoctorMessage}
@@ -242,7 +233,7 @@ export default function CentinelaDashboard() {
                 {copiedMsg ? "¡Copiado!" : "Copiar Texto"}
               </button>
             </div>
-            <p className="text-xs text-slate-600 bg-white p-3 rounded-lg border border-slate-200 font-mono leading-relaxed select-all">
+            <p className="text-xs text-slate-600 bg-white p-3 rounded-lg border border-slate-200 font-mono leading-relaxed select-all whitespace-pre-line">
               {doctorMessage}
             </p>
           </div>

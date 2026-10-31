@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
+import { trackLeadClick } from "@/lib/analytics/track";
 
 export function FloatingWhatsapp() {
   const pathname = usePathname();
@@ -25,21 +26,7 @@ export function FloatingWhatsapp() {
     if (pathname.includes("laboratorios")) {
       return "Hola AinovaHealth, requiero cotizar y agendar exámenes de Laboratorio Clínico a domicilio. Mi nombre es...";
     }
-    return "Hola AinovaHealth, requiero atención médica a domicilio. Mi nombre es...";
-  };
-
-  const handleTrackClick = (type: "whatsapp" | "call") => {
-    if (typeof window !== "undefined") {
-      const dataLayer = (window as unknown as { dataLayer?: Array<Record<string, unknown>> }).dataLayer;
-      if (Array.isArray(dataLayer)) {
-        dataLayer.push({
-          event: type === "whatsapp" ? "whatsapp_click" : "call_click",
-          lead_type: type,
-          destination: "+573007239175",
-          page_path: pathname,
-        });
-      }
-    }
+    return "Hola AinovaHealth, requiero atención médica particular a domicilio. Mi nombre es...";
   };
 
   const waUrl = `https://wa.me/573007239175?text=${encodeURIComponent(getCustomMessage())}`;
@@ -54,7 +41,13 @@ export function FloatingWhatsapp() {
         {/* Canal Telefónico de Urgencia */}
         <a
           href="tel:+573007239175"
-          onClick={() => handleTrackClick("call")}
+          onClick={() =>
+            trackLeadClick({
+              type: "call",
+              location: "floating_dock",
+              service: pathname === "/" ? "medicina_general" : pathname.replace("/", ""),
+            })
+          }
           id="btn-floating-call"
           aria-label="Llamar directamente al médico particular"
           className="flex items-center gap-2 rounded-full px-3.5 py-2 text-xs font-semibold text-[#083946] transition-colors hover:bg-slate-100/90"
@@ -71,7 +64,13 @@ export function FloatingWhatsapp() {
         {/* Canal Principal WhatsApp Médico */}
         <a
           href={waUrl}
-          onClick={() => handleTrackClick("whatsapp")}
+          onClick={() =>
+            trackLeadClick({
+              type: "whatsapp",
+              location: "floating_dock",
+              service: pathname === "/" ? "medicina_general" : pathname.replace("/", ""),
+            })
+          }
           id="btn-floating-whatsapp"
           target="_blank"
           rel="noopener noreferrer"

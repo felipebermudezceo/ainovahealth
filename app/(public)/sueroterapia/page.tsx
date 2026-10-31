@@ -8,6 +8,7 @@ import { Footer } from "@/components/sections/Footer";
 import { FloatingWhatsapp } from "@/components/ui/FloatingWhatsapp";
 import { FaShieldAlt, FaWhatsapp, FaPhoneAlt, FaCheckCircle, FaUserMd } from "react-icons/fa";
 import Link from "next/link";
+import { trackLeadClick } from "@/lib/analytics/track";
 
 export default function SueroterapiaPage() {
   const waUrl = "https://wa.me/573007239175?text=" + encodeURIComponent("Hola AinovaHealth, deseo agendar una valoracion medica y Sueroterapia a domicilio. Mi nombre es...");
@@ -61,6 +62,13 @@ export default function SueroterapiaPage() {
                   href={waUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackLeadClick({
+                      type: "whatsapp",
+                      location: "sueroterapia_hero",
+                      service: "sueroterapia",
+                    })
+                  }
                   className="flex items-center justify-center gap-3 rounded-full bg-emerald-500 px-8 py-4 font-semibold text-white shadow-lg shadow-emerald-950/20 transition-all hover:bg-emerald-600 hover:scale-[1.02]"
                 >
                   <FaWhatsapp className="text-xl" />
@@ -69,6 +77,13 @@ export default function SueroterapiaPage() {
 
                 <a
                   href="tel:+573007239175"
+                  onClick={() =>
+                    trackLeadClick({
+                      type: "call",
+                      location: "sueroterapia_hero",
+                      service: "sueroterapia",
+                    })
+                  }
                   className="flex items-center justify-center gap-3 rounded-full border border-white/30 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-md transition-all hover:bg-white/20"
                 >
                   <FaPhoneAlt />

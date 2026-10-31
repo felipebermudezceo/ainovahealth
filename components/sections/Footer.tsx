@@ -1,6 +1,9 @@
+"use client";
+
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 import { Clock, Home, Stethoscope, HeartHandshake, MapPin } from "lucide-react";
 import Link from "next/link";
+import { trackLeadClick } from "@/lib/analytics/track";
 
 export function Footer() {
   return (
@@ -20,9 +23,15 @@ export function Footer() {
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
-                  href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20requiero%20solicitar%20un%20m%C3%A9dico%20a%20domicilio."
+                  href="https://wa.me/573007239175?text=Hola%20AinovaHealth%2C%20requiero%20solicitar%20un%20m%C3%A9dico%20particular%20a%20domicilio."
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackLeadClick({
+                      type: "whatsapp",
+                      location: "footer",
+                    })
+                  }
                   className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#22C55E] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#16A34A]"
                 >
                   <FaWhatsapp className="text-lg" />
@@ -31,6 +40,12 @@ export function Footer() {
 
                 <a
                   href="tel:+573007239175"
+                  onClick={() =>
+                    trackLeadClick({
+                      type: "call",
+                      location: "footer",
+                    })
+                  }
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
                 >
                   <FaPhoneAlt className="text-xs text-emerald-300" />
@@ -39,7 +54,7 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Columna 2: Compromisos Médicos Reales (Sin emojis) */}
+            {/* Columna 2: Compromisos Médicos Reales */}
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="flex items-start gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10 text-emerald-300">
