@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { GoogleTagManager } from "@next/third-parties/google";
+import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 
 export const metadata: Metadata = {
@@ -116,6 +116,7 @@ export default function PublicLayout({
   return (
     <>
       <GoogleTagManager gtmId="GTM-5MKF9RB8" />
+      <GoogleAnalytics gaId="G-2S250ZE0EG" />
 
       {/* Marcado Schema.org Médico para SEO y SEM */}
       <script

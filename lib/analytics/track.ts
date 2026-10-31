@@ -9,8 +9,12 @@ export interface TrackLeadParams {
 }
 
 /**
- * Registra eventos de conversión (WhatsApp y Llamadas) en Google Tag Manager (dataLayer)
- * y Google Ads / GA4 (gtag) para alimentar el algoritmo de pujas de Google Ads.
+ * Registra eventos de conversión (WhatsApp y Llamadas) en Google Tag Manager (GTM-5MKF9RB8)
+ * y Google Analytics 4 / Google Tag (G-2S250ZE0EG / GT-TQR2BF2W) para activar los objetivos
+ * de Google Ads:
+ * - Contacto (2 acciones principales: qualify_lead y close_convert_lead / contact)
+ * - Clic saliente (1 acción principal: whatsapp_click / click)
+ * - Leads obtenidos por mensajes y Cliente potencial de llamada telefónica
  */
 export function trackLeadClick({
   type,
@@ -21,16 +25,21 @@ export function trackLeadClick({
 }: TrackLeadParams) {
   if (typeof window === "undefined") return;
 
-  const eventName = type === "whatsapp" ? "whatsapp_click" : "call_click";
+  const primaryEvent = type === "whatsapp" ? "whatsapp_click" : "call_click";
   const pagePath = window.location.pathname;
+  const outboundUrl =
+    type === "whatsapp"
+      ? `https://wa.me/${destination.replace(/\D/g, "")}`
+      : `tel:${destination}`;
 
-  const payload: Record<string, unknown> = {
-    event: eventName,
+  const baseParams: Record<string, unknown> = {
     lead_type: type,
     lead_location: location,
     city,
     service,
     destination,
+    link_url: outboundUrl,
+    outbound: true,
     page_path: pagePath,
     value: 140000,
     currency: "COP",
@@ -41,20 +50,40 @@ export function trackLeadClick({
     gtag?: (...args: unknown[]) => void;
   };
 
-  if (Array.isArray(win.dataLayer)) {
-    win.dataLayer.push(payload);
-  } else {
-    win.dataLayer = [payload];
+  if (!Array.isArray(win.dataLayer)) {
+    win.dataLayer = [];
+  }
+
+  // Eventos configurados como conversiones clave en G-2S250ZE0EG / Google Ads
+  const conversionEvents = [
+    primaryEvent,
+    "qualify_lead",
+    "close_convert_lead",
+    "contact",
+  ];
+
+  for (const evt of conversionEvents) {
+    win.dataLayer.push({
+      event: evt,
+      ...baseParams,
+    });
   }
 
   if (typeof win.gtag === "function") {
-    win.gtag("event", eventName, {
-      event_category: "lead",
-      event_label: `${location}_${city}_${service}`,
-      lead_type: type,
-      value: 140000,
-      currency: "COP",
+    for (const evt of conversionEvents) {
+      win.gtag("event", evt, {
+        event_category: "lead",
+        event_label: `${location}_${city}_${service}`,
+        ...baseParams,
+      });
+    }
+
+    // Evento de clic saliente estándar de Google Tag (Categoría: Clic saliente)
+    win.gtag("event", "click", {
+      event_category: "outbound",
+      event_label: outboundUrl,
+      transport_type: "beacon",
+      ...baseParams,
     });
   }
 }
-
