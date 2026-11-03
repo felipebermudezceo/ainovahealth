@@ -115,7 +115,95 @@ export default function PublicLayout({
 }>) {
   return (
     <>
+      {/* Contenedor Oficial Google Tag Manager */}
       <GoogleTagManager gtmId="GTM-5MKF9RB8" />
+
+      {/* Google Tag Oficial para Google Ads (AW-8451928504) */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=AW-8451928504"
+        strategy="afterInteractive"
+      />
+      <Script id="google-ads-tag-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', 'AW-8451928504', {
+            send_page_view: true
+          });
+        `}
+      </Script>
+
+      {/* Escuchador Global de Conversiones Automáticas para WhatsApp y Teléfono */}
+      <Script id="auto-conversion-listener" strategy="afterInteractive">
+        {`
+          (function() {
+            if (typeof window === 'undefined') return;
+            document.addEventListener('click', function(e) {
+              try {
+                var target = e.target.closest('a');
+                if (!target) return;
+                var href = target.getAttribute('href') || '';
+                
+                // Conversión WhatsApp
+                if (href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp.com') !== -1) {
+                  if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'conversion', {
+                      'send_to': 'AW-8451928504',
+                      'value': 140000.0,
+                      'currency': 'COP'
+                    });
+                    window.gtag('event', 'generate_lead', {
+                      'event_category': 'lead',
+                      'event_label': 'whatsapp_click',
+                      'value': 140000.0,
+                      'currency': 'COP'
+                    });
+                  }
+                  if (Array.isArray(window.dataLayer)) {
+                    window.dataLayer.push({
+                      'event': 'whatsapp_conversion',
+                      'event_category': 'lead',
+                      'lead_type': 'whatsapp',
+                      'value': 140000,
+                      'currency': 'COP'
+                    });
+                  }
+                }
+                
+                // Conversión Llamada Telefónica
+                if (href.indexOf('tel:') !== -1) {
+                  if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'conversion', {
+                      'send_to': 'AW-8451928504',
+                      'value': 140000.0,
+                      'currency': 'COP'
+                    });
+                    window.gtag('event', 'generate_lead', {
+                      'event_category': 'lead',
+                      'event_label': 'phone_call',
+                      'value': 140000.0,
+                      'currency': 'COP'
+                    });
+                  }
+                  if (Array.isArray(window.dataLayer)) {
+                    window.dataLayer.push({
+                      'event': 'call_conversion',
+                      'event_category': 'lead',
+                      'lead_type': 'call',
+                      'value': 140000,
+                      'currency': 'COP'
+                    });
+                  }
+                }
+              } catch (err) {
+                console.error('Error tracking conversion:', err);
+              }
+            }, true);
+          })();
+        `}
+      </Script>
 
       {/* Marcado Schema.org Médico para SEO y SEM */}
       <script
