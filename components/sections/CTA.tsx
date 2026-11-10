@@ -14,7 +14,7 @@ export function CTA() {
                 ¿Necesitas un médico en casa hoy?
               </h2>
               <p className="mt-3 max-w-[560px] text-base leading-relaxed text-slate-200">
-                Escríbenos o llámanos ahora. Coordinamos la visita de un médico dedicado para atenderte en Bogotá o Medellín en 45 a 60 minutos, sin trámites de EPS ni suscripciones.
+                Escríbenos o llámanos ahora. Coordinamos la visita de un médico dedicado para atenderte en Bogotá o Medellín en 40 a 60 minutos, sin trámites de EPS ni suscripciones.
               </p>
             </div>
 

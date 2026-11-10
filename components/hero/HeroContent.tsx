@@ -70,7 +70,7 @@ export function HeroContent() {
     bogota: {
       label: "Bogotá",
       activeDoctors: "Médicos disponibles ahora en Bogotá y Sabana",
-      eta: "45 a 60 min",
+      eta: "40 a 60 min",
       ctaLabel: "Solicitar médico en Bogotá",
       waText:
         "Hola AinovaHealth, necesito solicitar un médico particular a domicilio en Bogotá. Estoy en el barrio...",
@@ -78,7 +78,7 @@ export function HeroContent() {
     medellin: {
       label: "Medellín",
       activeDoctors: "Médicos disponibles ahora en Medellín y Valle de Aburrá",
-      eta: "40 a 55 min",
+      eta: "40 a 60 min",
       ctaLabel: "Solicitar médico en Medellín",
       waText:
         "Hola AinovaHealth, necesito solicitar un médico particular a domicilio en Medellín. Estoy en el sector...",

@@ -21,7 +21,7 @@ export function FAQ() {
     },
     {
       q: "¿Cuánto tiempo demora en llegar el médico?",
-      a: "El tiempo estimado es de 45 a 60 minutos desde que nos contactas por WhatsApp o llamada, coordinando al médico más cercano para que no tengas que esperar.",
+      a: "El tiempo estimado es de 40 a 60 minutos desde que nos contactas por WhatsApp o llamada, coordinando al médico más cercano para que no tengas que esperar.",
     },
     {
       q: "¿Cómo se realiza el pago de la consulta?",

@@ -10,7 +10,7 @@ export function WhyChoose() {
     {
       step: "Paso 2",
       title: "Coordinamos tu visita",
-      desc: "Te confirmamos el tiempo de llegada estimado (habitualmente de 45 a 60 minutos).",
+      desc: "Te confirmamos el tiempo de llegada estimado (habitualmente de 40 a 60 minutos).",
     },
     {
       step: "Paso 3",
@@ -111,7 +111,7 @@ export function WhyChoose() {
               <ul className="mt-5 space-y-3 text-sm text-slate-700">
                 <li className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-[#16A34A] shrink-0 mt-0.5" />
-                  <span><strong>Llegada en 45 a 60 min:</strong> Te confirmamos el tiempo al contactarnos.</span>
+                  <span><strong>Llegada en 40 a 60 min:</strong> Te confirmamos el tiempo al contactarnos.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-[#16A34A] shrink-0 mt-0.5" />

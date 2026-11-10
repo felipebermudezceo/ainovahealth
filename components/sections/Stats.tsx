@@ -9,7 +9,7 @@ export function Stats() {
     },
     {
       icon: Clock,
-      value: "45 a 60 min",
+      value: "40 a 60 min",
       subtitle: "Tiempo estimado de llegada a tu casa",
     },
     {
