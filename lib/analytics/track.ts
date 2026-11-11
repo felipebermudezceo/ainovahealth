@@ -10,10 +10,12 @@ export interface TrackLeadParams {
 
 /**
  * Registra eventos de conversión (WhatsApp y Llamadas) directamente en:
- * 1. Google Ads Conversion Tag (AW-8451928504)
+ * 1. Google Ads Conversion Tag (AW-18367752315/2wesCJfU4_4cEPvQtrZE)
  * 2. Google Tag Manager (dataLayer)
  * 3. GA4 y Google Analytics (generate_lead, contact, whatsapp_click)
  */
+const GOOGLE_ADS_CONVERSION_SEND_TO = "AW-18367752315/2wesCJfU4_4cEPvQtrZE";
+
 export function trackLeadClick({
   type,
   location,
@@ -41,7 +43,10 @@ export function trackLeadClick({
   const win = window as unknown as {
     dataLayer?: Array<Record<string, unknown>>;
     gtag?: (...args: unknown[]) => void;
+    __ainovaLastConvTs?: number;
   };
+
+  win.__ainovaLastConvTs = Date.now();
 
   if (!Array.isArray(win.dataLayer)) {
     win.dataLayer = [];
@@ -49,7 +54,7 @@ export function trackLeadClick({
   win.dataLayer.push(payload);
   win.dataLayer.push({
     event: "conversion",
-    send_to: "AW-8451928504",
+    send_to: GOOGLE_ADS_CONVERSION_SEND_TO,
     value: 140000,
     currency: "COP",
   });
@@ -57,7 +62,7 @@ export function trackLeadClick({
   if (typeof win.gtag === "function") {
     // 1. Google Ads Conversion directa
     win.gtag("event", "conversion", {
-      send_to: "AW-8451928504",
+      send_to: GOOGLE_ADS_CONVERSION_SEND_TO,
       value: 140000,
       currency: "COP",
     });
